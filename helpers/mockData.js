@@ -1,5 +1,3 @@
-
-
 function randomNum(params) {
     return Math.random() * params;
 }
