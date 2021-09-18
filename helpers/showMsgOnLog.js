@@ -2,4 +2,11 @@ function showLog(params) {
     console.info(params);
 }
 
-module.exports = showLog;
+function showError(params) {
+    console.error(params);
+}
+
+module.exports = {
+    showLog,
+    showError
+};

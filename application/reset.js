@@ -1,4 +1,4 @@
-const showLog = require('../helpers/showMsgOnLog');
+const { showLog } = require('../helpers/showMsgOnLog');
 const deleteAllDevice = require('../controllers/devices/deleteAllDevice');
 
 try {

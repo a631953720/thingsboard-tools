@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { FILE, DEVICE } = require('../constant/env');
-const showLog = require('../helpers/showMsgOnLog');
+const { showLog } = require('../helpers/showMsgOnLog');
 const deviceList = require(`../output/${DEVICE.deviceListFileName}`);
 
 function saveTestInformation(count) {

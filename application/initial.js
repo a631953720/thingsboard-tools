@@ -1,6 +1,6 @@
 const addDevices = require('../controllers/devices/addDevice');
 const getDeviceTokenList = require('../controllers/devices/getDeviceTokenList');
-const showLog = require('../helpers/showMsgOnLog');
+const { showLog } = require('../helpers/showMsgOnLog');
 const fs = require('fs');
 const { FILE } = require('../constant/env');
 
