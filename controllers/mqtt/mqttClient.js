@@ -41,6 +41,12 @@ function connectToTB(config) {
         setTimeout(() => {
             publishData({ ...config, client: client });
         }, (connectDelay * deviceListLength));
+
+        // Save total publish data times to json file every some seconds.
+        setInterval(() => {
+            const totalTimes = timeArr.reduce((accu, curr) => accu + curr);
+            saveTestInformation(totalTimes);
+        }, saveOutputFrequency);
     }
     
     if (isSubscribeRPC) {
@@ -69,12 +75,6 @@ function MQTTConnecter(config) {
         }, connectDelay * (idx + 1));
     });
 }
-
-// Save total publish data times to json file every some seconds.
-setInterval(() => {
-    const totalTimes = timeArr.reduce((accu, curr) => accu + curr);
-    saveTestInformation(totalTimes);
-}, saveOutputFrequency);
 
 module.exports = {
     MQTTConnecter

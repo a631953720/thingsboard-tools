@@ -42,7 +42,7 @@ function subscribeRPC(client) {
 
 setInterval(() => {
     saveErrorDeviceList(errorDeviceList);
-}, saveOutputFrequency)
+}, saveOutputFrequency);
 
 module.exports = {
     initConnect,
