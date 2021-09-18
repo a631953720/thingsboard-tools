@@ -3,3 +3,4 @@ node_modules
 deviceList.json
 Log*.json
 ErrorLog*.json
+RPCMessageLog*.json

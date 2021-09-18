@@ -5,6 +5,7 @@ require('dotenv').config();
 const deviceListFileName = 'deviceList.json';
 const LogFileName = `Log${Date.now()}.json`;
 const ErrorLogFileName = `ErrorLog${Date.now()}.json`;
+const RPCMessageLogFileName = `RPCMessageLog${Date.now()}.json`
 
 module.exports = {
     SERVER: {
@@ -22,6 +23,7 @@ module.exports = {
         deviceJsonPath: pathToFileURL(__dirname + `/../output/${deviceListFileName}`),
         logFilePath: pathToFileURL(__dirname + `/../output/${LogFileName}`),
         errorLogFilePath: pathToFileURL(__dirname + `/../output/${ErrorLogFileName}`),
+        RPCMessageLogFilePath: pathToFileURL(__dirname + `/../output/${RPCMessageLogFileName}`),
         saveOutputFrequency: process.env.SAVE_OUTPUT_FREQUENCY
     },
     MQTT: {

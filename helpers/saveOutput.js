@@ -32,7 +32,22 @@ function saveErrorDeviceList(errorDeviceList) {
     });
 }
 
+function saveRPCMessage(RPCMessageList) {
+    showLog('Save RPC message...');
+
+    const jsonPath = FILE.RPCMessageLogFilePath;
+    const data = JSON.stringify({
+        ...RPCMessageList,
+        updateTime: new Date().toLocaleString()
+    });
+
+    fs.writeFileSync(jsonPath, data, (err) => {
+        console.error('Data written to file error', err);
+    });
+}
+
 module.exports = {
     saveTestInformation,
-    saveErrorDeviceList
+    saveErrorDeviceList,
+    saveRPCMessage
 };

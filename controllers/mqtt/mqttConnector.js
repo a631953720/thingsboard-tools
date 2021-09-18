@@ -1,9 +1,10 @@
 const mqtt = require('mqtt');
 const { showLog, showError } = require('../../helpers/showMsgOnLog');
 const { SERVER, MQTT, FILE } = require('../../constant/env');
-const { saveErrorDeviceList } = require('../../helpers/saveOutput');
+const { saveErrorDeviceList, saveRPCMessage } = require('../../helpers/saveOutput');
 const { serverRPCTopic, responseRPCTopic } = require('../../constant/mqttTopic');
 
+const RPCMessageList = [];
 const errorDeviceList = [];
 const saveOutputFrequency = Number(FILE.saveOutputFrequency) * 1000;
 
@@ -29,19 +30,37 @@ function initConnect(device) {
 }
 
 function subscribeRPC(client) {
+
     client.subscribe(serverRPCTopic);
 
-    client.on('message', function (topic, message) {
-        console.log('request.topic: ' + topic);
-        console.log('request.body: ' + message.toString());
+    client.on('message', (topic, message) => {
+        console.log('request.topic: ', topic);
+        console.log('request.body: ', JSON.parse(message));
+        
+        const serverRPCMessage = JSON.parse(message);
         const requestId = topic.slice('v1/devices/me/rpc/request/'.length);
+        const responsePayload = JSON.stringify({
+            method: serverRPCMessage.method,
+            params: {
+                ...serverRPCMessage.params,
+                isDone: true
+            }
+        });
+
         // client acts as an echo service
-        client.publish(responseRPCTopic + requestId, message);
+        client.publish(responseRPCTopic + requestId, responsePayload);
+
+        RPCMessageList.push({
+            topic:topic,
+            serverRPCMessage: message.toString()
+        });
     });
 }
 
+// 可以不用每次都開著
 setInterval(() => {
     saveErrorDeviceList(errorDeviceList);
+    saveRPCMessage(RPCMessageList)
 }, saveOutputFrequency);
 
 module.exports = {
