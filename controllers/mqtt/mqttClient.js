@@ -34,7 +34,6 @@ function publishData(config) {
 }
 
 function connectToTB(config) {
-    console.log(config);
     const { device, deviceListLength, isSendData, isSubscribeRPC } = config;
     const client = initConnect(device);
 
