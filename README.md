@@ -143,3 +143,63 @@ output
 | error    | Save device MQTT connect error log   |
 | mockData | Save device publish data information |
 | RPC      | Save device RPC message              |
+
+## 9. RPC test
+
+### 1. Subscribe RPC topic & Virtual device start
+Make sure that `.env` exist and set SUBSCRIBE_RPC=true.
+```
+npm run device-start
+```
+
+### 2. Get device id
+After add device, you can see `deviceList.json` as follow.
+```json
+[
+    {"name":"device-0","id":"83e8c0b0-18bc-11ec-bcd9-05ea625289ba","token":"QDHyEI5isiE7sRkqQKWj"}
+]
+```
+Copy this device id.
+
+### 3. Get JWT token
+After run save tenant token script, you can see `output/JWTToken.txt` as follow.
+```
+Bearer token
+```
+Copy this JWT token.
+
+### 3. Call RPC server-side API
+You can use postman to send a server-side RPC to virtual device. Send a HTTP POST request to the following URL.
+```
+http(s)://host:port/api/plugins/rpc/twoway/{deviceId}
+```
+
+Or you can test API by curl.
+
+```bash
+curl -v -X POST -d @set-gpio-request.json http://$SERVER:$HOST/api/plugins/rpc/twoway/$DEVICE_ID --header "Content-Type:application/json"  --header "X-Authorization: $JWT_TOKEN"
+```
+
+set-gpio-request.json:
+```json
+{
+    "method": "setGpio",
+    "params": {
+        "pin": "23",
+        "value": 1
+    }
+}
+```
+
+### 4. Virtual device response message
+After receive server-side RPC, you can get the response as follow.
+```json
+{
+    "method": "setGpio",
+    "params": {
+        "pin": "23",
+        "value": 1,
+        "isDone": true
+    }
+}
+```
