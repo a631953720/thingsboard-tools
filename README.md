@@ -1,3 +1,26 @@
+# What does this tool solve?
+
+## 1. Auto get and save tenant jwt token.
+This tool will auto login to TB. Users don't need to get tokens by themselves, and also to save the token to `output/JWTToken.txt`.
+
+## 2. Create virtual device to TB
+This tool will create device to TB.
+
+After create virtual device, you can send mock data or subscribe TB RPC topic. 
+
+## 3. Subscribe TB RPC topic
+You can use this tool to observe how TB RPC work.
+
+If you set virtual device subscribe TB RPC topic. Virtual device will respond with a message to the server when receiving any server-side RPC request.
+
+You can get more information as TB document.
+https://thingsboard.io/docs/user-guide/rpc/
+
+## 4. Save program output
+After this tool execute for a period of time. Program will save output to json file.
+
+You can run this tool for a long time and keep recording the output results, so you don’t have to worry about program interruption.
+
 # How to use
 
 ## 1. Install package
@@ -74,7 +97,15 @@ SUBSCRIBE_RPC=true
 npm run device-start
 ```
 
-## 6. Environmental variables
+## 6 Save tenant token
+### Save token to file
+After run this script, the token will save to `output/JWTToken.txt`
+
+```
+npm run save-token
+```
+
+## 7. Environmental variables
 
 | Variables             | Description                                               | Default value |
 |-----------------------|-----------------------------------------------------------|---------------|
@@ -93,7 +124,7 @@ npm run device-start
 | SAVE_OUTPUT_FREQUENCY | Save program output every few seconds (s)                 | 30            |
 | SAVE_LOG              | Program will save log to output folder                    | true          |
 
-## 7. Output folder
+## 8. Output folder
 
 ### Folder tree
 After run init script, you can see `output` folder as follow.
