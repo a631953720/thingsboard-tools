@@ -1,5 +1,5 @@
 const mqtt = require('mqtt')
-const { SERVER, MQTT } = require('../../constant/env');
+const { SERVER, MQTT, FILE } = require('../../constant/env');
 const { saveErrorDeviceList } = require('../../helpers/saveOutput');
 
 const errorDeviceList = [];
@@ -26,7 +26,7 @@ function initConnect(device) {
 
 setInterval(() => {
     saveErrorDeviceList(errorDeviceList);
-}, 30 * 1000)
+}, FILE.saveOutputFrequency * 1000)
 
 module.exports = {
     initConnect

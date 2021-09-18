@@ -20,8 +20,8 @@ module.exports = {
     },
     FILE: {
         deviceJsonPath: pathToFileURL(__dirname + `/../output/${deviceListFileName}`),
-        LogFilePath: pathToFileURL(__dirname + `/../output/${LogFileName}`),
-        ErrorLogFilePath: pathToFileURL(__dirname + `/../output/${ErrorLogFileName}`),
+        logFilePath: pathToFileURL(__dirname + `/../output/${LogFileName}`),
+        errorLogFilePath: pathToFileURL(__dirname + `/../output/${ErrorLogFileName}`),
         saveOutputFrequency: process.env.SAVE_OUTPUT_FREQUENCY
     },
     MQTT: {

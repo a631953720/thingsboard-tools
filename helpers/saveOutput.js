@@ -6,7 +6,7 @@ const deviceList = require(`../output/${DEVICE.deviceListFileName}`);
 function saveTestInformation(count) {
     showLog('Save output...');
 
-    const jsonPath = FILE.LogFilePath;
+    const jsonPath = FILE.logFilePath;
     const data = JSON.stringify({
         deviceCount: deviceList.length,
         testCount: count,
@@ -21,7 +21,7 @@ function saveTestInformation(count) {
 function saveErrorDeviceList(errorDeviceList) {
     showLog('Save error device list...');
 
-    const jsonPath = FILE.ErrorLogFilePath;
+    const jsonPath = FILE.errorLogFilePath;
     const data = JSON.stringify({
         ...errorDeviceList,
         updateTime: new Date().toLocaleString()
