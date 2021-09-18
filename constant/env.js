@@ -3,6 +3,7 @@ const { pathToFileURL } = require('url');
 require('dotenv').config();
 
 const deviceListFileName = 'deviceList.json';
+const LogFileName = 'Log.json';
 
 module.exports = {
     SERVER: {
@@ -19,7 +20,8 @@ module.exports = {
     },
     FILE: {
         deviceJsonPath: pathToFileURL(__dirname + `/../output/${deviceListFileName}`),
-        jsonPath: pathToFileURL(__dirname + `/../output/${deviceListFileName}`),
+        LogFilePath: pathToFileURL(__dirname + `/../output/${LogFileName}`),
+        saveOutputFrequency: process.env.SAVE_OUTPUT_FREQUENCY
     },
     MQTT: {
         publish_frequency: process.env.PUBLISH_FREQUENCY || "10",
