@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "init": "mkdir output || node ./application/initial.js",
-    "virtual-device-start": "node ./application/runVirtualDevice.js",
-    "remove": "node ./application/reset.js"
+    "init": "mkdir output",
+    "add-device": "node ./application/initial.js",
+    "remove-device": "node ./application/reset.js",
+    "device-start": "node ./application/runVirtualDevice.js"
   },
   "keywords": [],
   "author": "",
