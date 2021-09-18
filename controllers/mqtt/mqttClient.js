@@ -3,7 +3,7 @@ const { rawData } = require('../../helpers/mockData');
 const { initConnect } = require('./mqttConnector');
 const { saveTestInformation } = require('../../helpers/saveOutput');
 const { showLog } = require('../../helpers/showMsgOnLog');
-const topic = require('../../constant/mqttTopic');
+const { telemetryTopic } = require('../../constant/mqttTopic');
 const deviceList = require(`../../output/${DEVICE.deviceListFileName}`);
 
 const timeArr = [];
@@ -17,7 +17,7 @@ function publishData(config) {
     const timeId = setInterval(() => {
         const data = JSON.stringify(rawData());
 
-        client.publish(topic, data, () => {
+        client.publish(telemetryTopic, data, () => {
             showLog(`${device.name} send data`);
             timeArr[idx] += 1;
         });
