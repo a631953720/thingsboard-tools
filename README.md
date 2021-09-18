@@ -91,7 +91,7 @@ npm run device-start
 | SEND_MOCK_DATA        | Virtual device will publish mock data                     | true          |
 | SUBSCRIBE_RPC         | Virtual device will subscribe TB RPC topic                | false         |
 | SAVE_OUTPUT_FREQUENCY | Save program output every few seconds (s)                 | 30            |
-| SAVE_LOG              | Program will save output                                  | true          |
+| SAVE_LOG              | Program will save log to output folder                    | true          |
 
 ## 7. Output folder
 
