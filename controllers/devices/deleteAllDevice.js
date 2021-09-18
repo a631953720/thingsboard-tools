@@ -1,14 +1,11 @@
 const proxyToTB = require('../../helpers/proxyToTB');
-const {
-    SERVER,
-    DEVICE
-} = require('../../constant/env');
+const { SERVER, DEVICE } = require('../../constant/env');
 
 async function deleteAllDevice() {
     const deviceList = require(`../../output/${DEVICE.deviceListFileName}`);
 
     if (!Array.isArray(deviceList)) throw new Error('device is not array');
-    
+
     for (let i = 0; i < deviceList.length; i++) {
         try {
             const opt = {

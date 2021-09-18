@@ -1,8 +1,4 @@
-const {
-    DEVICE,
-    MQTT,
-    FILE
-} = require('../../constant/env');
+const { DEVICE, MQTT, FILE } = require('../../constant/env');
 const { rawData } = require('../../helpers/mockData');
 const { initConnect } = require('./mqttConnector');
 const saveOutput = require('../../helpers/saveOutput');
@@ -38,7 +34,7 @@ function publishData(frequency) {
                 const totalTimes = timeArr.reduce((accu, curr) => accu + curr);
                 console.log('total', totalTimes);
             }
-        }, frequency * 1000);
+        }, frequency);
     });
 }
 

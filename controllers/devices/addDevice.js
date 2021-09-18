@@ -1,8 +1,5 @@
 const proxyToTB = require('../../helpers/proxyToTB');
-const {
-    SERVER,
-    DEVICE
-} = require('../../constant/env');
+const { SERVER, DEVICE } = require('../../constant/env');
 
 const opt = {
     method: 'post',

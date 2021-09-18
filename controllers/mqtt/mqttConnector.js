@@ -1,8 +1,5 @@
 const mqtt = require('mqtt')
-const {
-    SERVER,
-    MQTT
-} = require('../../constant/env');
+const { SERVER, MQTT } = require('../../constant/env');
 
 function initConnect(device) {
     const client = mqtt.connect(`mqtt://${SERVER.host}:${MQTT.port}`, {
