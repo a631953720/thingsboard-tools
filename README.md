@@ -20,7 +20,6 @@ SEND_MOCK_DATA=true
 SUBSCRIBE_RPC=true
 SAVE_OUTPUT_FREQUENCY= save_output_every_some_seconds
 SAVE_LOG=true
-JWT_TOKEN= TB_tenant_jwt_token
 ```
 
 ## 3.Init folder
@@ -47,11 +46,47 @@ npm run add-device
 npm run remove-device
 ```
 
-## 5.Publish mock data
+## 5.Virtual device settings
 
 ### Send mock data:
-This script will publish mock data to TB.
+
+Set `SEND_MOCK_DATA` true. This parameter will make virtual device to publish mock data to TB.
+
+```
+...
+SEND_MOCK_DATA=true
+...
+```
+### Subscribe RPC topic
+Set `SUBSCRIBE_RPC` true. This parameter will make virtual device to subscribe RPC topic to TB.
+
+```
+...
+SUBSCRIBE_RPC=true
+...
+```
+
+### Start virtual device
+
 
 ```
 npm run device-start
 ```
+
+## 6. Environmental variables
+
+| Variables             | Description                                               | Default value |
+|-----------------------|-----------------------------------------------------------|---------------|
+| HOST                  | TB server host                                            | 127.0.0.1     |
+| PORT                  | TB server port                                            | 80            |
+| NUMBER_OF_DEVICES     | Virtual device count                                      | 1             |
+| DEVICE_TYPE           | Virtual device type in TB                                 | default       |
+| DEVICE_LABEL          | Virtual device label in TB                                |               |
+| MQTT_PORT             | TB MQTT port                                              | 1883          |
+| PUBLISH_FREQUENCY     | Virtual device publish data frequency (s)                 | 10            |
+| CONNECT_DELAY         | Virtual device connection delay (ms)                      | 5             |
+| TEST_TIME             | Virtual device publish data counts (0 is unlimited times) | 0             |
+| SEND_MOCK_DATA        | Virtual device will publish mock data                     | true          |
+| SUBSCRIBE_RPC         | Virtual device will subscribe TB RPC topic                | false         |
+| SAVE_OUTPUT_FREQUENCY | Save program output every few seconds (s)                 | 30            |
+| SAVE_LOG              | Program will save output                                  | true          |
