@@ -11,11 +11,11 @@ const opt = {
 
 async function addDevices() {
     const deviceIdList = [];
-    const { numberOfDevices, deviceType, deviceLabel } = DEVICE;
+    const { numberOfDevices, deviceName, deviceType, deviceLabel } = DEVICE;
     try {
         for (let i = 0; i < numberOfDevices; i++) {
             const deviceProfile = {
-                name: `device${i}`,
+                name: `${deviceName}-${i}`,
                 type: deviceType,
                 label: deviceLabel
             };

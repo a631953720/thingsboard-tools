@@ -14,6 +14,7 @@ module.exports = {
         port: process.env.PORT || '80'
     },
     DEVICE: {
+        deviceName: process.env.DEVICE_NAME || 'device',
         deviceType: process.env.DEVICE_TYPE || 'default',
         deviceLabel: process.env.DEVICE_LABEL || '',
         numberOfDevices: process.env.NUMBER_OF_DEVICES || 1,
