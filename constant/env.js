@@ -3,15 +3,14 @@ const { pathToFileURL } = require('url');
 require('dotenv').config();
 
 const deviceListFileName = 'deviceList.json';
-const LogFileName = `MockDataInfo${Date.now()}.json`;
-const ErrorLogFileName = `ErrorLog${Date.now()}.json`;
-const RPCMessageLogFileName = `RPCMessageLog${Date.now()}.json`
+const LogFileName = `mockData/MockDataInfo${Date.now()}.json`;
+const ErrorLogFileName = `error/ErrorLog${Date.now()}.json`;
+const RPCMessageLogFileName = `RPC/RPCMessageLog${Date.now()}.json`
 
 module.exports = {
     SERVER: {
         host: process.env.HOST || '127.0.0.1',
-        port: process.env.PORT || '80',
-        token: process.env.JWT_TOKEN
+        port: process.env.PORT || '80'
     },
     DEVICE: {
         deviceType: process.env.DEVICE_TYPE || 'default',
