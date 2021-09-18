@@ -10,6 +10,7 @@ const timeArr = [];
 const saveOutputFrequency = Number(FILE.saveOutputFrequency) * 1000;
 const connectDelay = Number(BUFFER.connectDelay);
 const testTime = Number(MQTT.testTime);
+const isSaveLog = Boolean(FILE.isSaveLog);
 
 function publishData(config) {
     const { client, device, frequency, idx } = config;
@@ -42,7 +43,7 @@ function connectToTB(config) {
             publishData({ ...config, client: client });
         }, (connectDelay * deviceListLength));
     }
-    
+
     if (isSubscribeRPC) {
         subscribeRPC(client);
     }
@@ -71,10 +72,12 @@ function MQTTConnecter(config) {
 }
 
 // Save total publish data times to json file every some seconds.
-setInterval(() => {
-    const totalTimes = timeArr.reduce((accu, curr) => accu + curr);
-    saveTestInformation(totalTimes);
-}, saveOutputFrequency);
+if (isSaveLog) {
+    setInterval(() => {
+        const totalTimes = timeArr.reduce((accu, curr) => accu + curr);
+        saveTestInformation(totalTimes);
+    }, saveOutputFrequency);
+}
 
 module.exports = {
     MQTTConnecter

@@ -7,6 +7,7 @@ const { serverRPCTopic, responseRPCTopic } = require('../../constant/mqttTopic')
 const RPCMessageList = [];
 const errorDeviceList = [];
 const saveOutputFrequency = Number(FILE.saveOutputFrequency) * 1000;
+const isSaveLog = Boolean(FILE.isSaveLog);
 
 function initConnect(device) {
     const client = mqtt.connect(`mqtt://${SERVER.host}:${MQTT.port}`, {
@@ -58,10 +59,12 @@ function subscribeRPC(client) {
 }
 
 // 可以不用每次都開著
-setInterval(() => {
-    saveErrorDeviceList(errorDeviceList);
-    saveRPCMessage(RPCMessageList)
-}, saveOutputFrequency);
+if (isSaveLog){
+    setInterval(() => {
+        saveErrorDeviceList(errorDeviceList);
+        saveRPCMessage(RPCMessageList)
+    }, saveOutputFrequency);
+}
 
 module.exports = {
     initConnect,
