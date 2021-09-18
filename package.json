@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "init": "mkdir output",
+    "init": "mkdir output && cd output && mkdir RPC && mkdir mockData && mkdir error",
     "add-device": "node ./application/initial.js",
     "remove-device": "node ./application/reset.js",
     "device-start": "node ./application/runVirtualDevice.js"
