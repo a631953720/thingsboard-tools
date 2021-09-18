@@ -1,7 +1,9 @@
 const APICaller = require('./apiCaller');
 const { SERVER } = require('../constant/env');
+const { saveTenantToken } = require('./saveOutput');
 
 let token;
+let isTokenEmpty = true;
 
 async function loginAdmin() {
     const opt = {
@@ -70,12 +72,16 @@ async function getTenantJWTToken() {
     const tenantGroupId = await getTenantGroupId(adminToken);
     const tenantId = await getTenantId(adminToken, tenantGroupId);
     const tenantToken = await getTenantToken(adminToken, tenantId);
-    
+
     return tenantToken;
 }
 
 async function proxyToTB(config) {
     token = token || await getTenantJWTToken();
+    if (isTokenEmpty) {
+        saveTenantToken(token);
+        isTokenEmpty = false;
+    }
     const _config = {
         ...config,
         headers: {

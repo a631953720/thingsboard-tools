@@ -4,3 +4,4 @@ deviceList.json
 MockDataInfo*.json
 ErrorLog*.json
 RPCMessageLog*.json
+JWTToken.txt

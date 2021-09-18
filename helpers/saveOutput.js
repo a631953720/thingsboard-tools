@@ -46,8 +46,19 @@ function saveRPCMessage(RPCMessageList) {
     });
 }
 
+function saveTenantToken(token) {
+    showLog('Save token');
+
+    const filePath = FILE.JSWTokenFilePath;
+
+    fs.writeFileSync(filePath, `Bearer ${token}`, (err) => {
+        console.error('Data written to file error', err);
+    });
+}
+
 module.exports = {
     saveTestInformation,
     saveErrorDeviceList,
-    saveRPCMessage
+    saveRPCMessage,
+    saveTenantToken
 };
