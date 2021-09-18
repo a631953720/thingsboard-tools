@@ -10,6 +10,7 @@ npm i
 HOST= TB_server_host
 PORT= TB_server_port
 NUMBER_OF_DEVICES= TB_device_counts
+DEVICE_NAME= TB_device_name
 DEVICE_TYPE= TB_device_type
 DEVICE_LABEL= TB_device_label
 MQTT_PORT= MQTT_port
@@ -80,6 +81,7 @@ npm run device-start
 | HOST                  | TB server host                                            | 127.0.0.1     |
 | PORT                  | TB server port                                            | 80            |
 | NUMBER_OF_DEVICES     | Virtual device count                                      | 1             |
+| DEVICE_NAME           | Virtual device name in TB                                 | device        |
 | DEVICE_TYPE           | Virtual device type in TB                                 | default       |
 | DEVICE_LABEL          | Virtual device label in TB                                |               |
 | MQTT_PORT             | TB MQTT port                                              | 1883          |
