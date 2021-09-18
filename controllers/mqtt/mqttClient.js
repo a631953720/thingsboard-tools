@@ -1,46 +1,70 @@
-const { DEVICE, MQTT, FILE } = require('../../constant/env');
+const { DEVICE, MQTT, FILE, BUFFER } = require('../../constant/env');
 const { rawData } = require('../../helpers/mockData');
 const { initConnect } = require('./mqttConnector');
-const saveOutput = require('../../helpers/saveOutput');
+const { saveTestInformation } = require('../../helpers/saveOutput');
 const topic = require('../../constant/mqttTopic');
+const deviceList = require(`../../output/${DEVICE.deviceListFileName}`);
 
 const timeArr = [];
-const saveOutputFrequency = FILE.saveOutputFrequency * 1000;
+const saveOutputFrequency = Number(FILE.saveOutputFrequency) * 1000;
+const connectDelay = Number(BUFFER.connectDelay);
 
-function publishData(frequency) {
-    const deviceList = DEVICE.deviceList;
-    const testTime = MQTT.testTime;
+function publishData(config) {
+    const { client, device, frequency, idx } = config;
+    const testTime = Number(MQTT.testTime);
+
+    const timeId = setInterval(() => {
+        const data = JSON.stringify(rawData());
+
+        client.publish(topic, data, () => {
+            console.log(`${device.name} send data`);
+            timeArr[idx] += 1;
+        });
+
+        if (timeArr[idx] >= testTime && testTime !== 0) {
+            clearInterval(timeId);
+            console.log('test end');
+        }
+
+        if (client.disconnected) clearInterval(timeId);
+
+    }, frequency);
+}
+
+function connectToTB(config) {
+    const { device, deviceListLength } = config;
+    const client = initConnect(device);
+
+    setTimeout(() => {
+        publishData({ ...config, client: client });
+    }, (connectDelay * deviceListLength));
+}
+
+function MQTTConnecter(frequency) {
+    const deviceListLength = deviceList.length;
 
     deviceList.forEach((device, idx) => {
-        console.log("device info: ", device);
+        const config = {
+            device: device,
+            frequency: frequency,
+            idx: idx,
+            deviceListLength: deviceListLength
+        };
+
         timeArr[idx] = 0;
-        const client = initConnect(device);
 
-        const timeId = setInterval(() => {
-            const data = JSON.stringify(rawData());
-
-            client.publish(topic, data, () => {
-                console.log('send data success');
-            })
-
-            console.log(`${device.name} connected`, timeArr[idx] += 1);
-            if (timeArr[idx] >= testTime && +testTime !== 0) {
-                clearInterval(timeId);
-                console.log('test end');
-            }
-
-            if (client.disconnected) clearInterval(timeId);
-            if (idx === timeArr.length - 1) {
-                const totalTimes = timeArr.reduce((accu, curr) => accu + curr);
-                console.log('total', totalTimes);
-            }
-        }, frequency);
+        // Set timeout to avoid all device connect at the same time.
+        setTimeout(() => {
+            connectToTB(config);
+        }, connectDelay * (idx + 1));
     });
 }
 
 // Save total publish data times to json file every some seconds.
 setInterval(() => {
-    saveOutput(timeArr.reduce((accu, curr) => accu + curr));
+    const totalTimes = timeArr.reduce((accu, curr) => accu + curr);
+    console.log("Total message count:", totalTimes);
+    saveTestInformation(totalTimes);
 }, saveOutputFrequency);
 
-module.exports = publishData;
+module.exports = MQTTConnecter;

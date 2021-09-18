@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const deviceListFileName = 'deviceList.json';
 const LogFileName = `Log${Date.now()}.json`;
+const ErrorLogFileName = `ErrorLog${Date.now()}.json`;
 
 module.exports = {
     SERVER: {
@@ -12,7 +13,6 @@ module.exports = {
         token: process.env.JWT_TOKEN
     },
     DEVICE: {
-        deviceList: require('../output/deviceList.json'),
         deviceType: process.env.DEVICE_TYPE || 'default',
         deviceLabel: process.env.DEVICE_LABEL || '',
         numberOfDevices: process.env.NUMBER_OF_DEVICES || 1,
@@ -21,11 +21,15 @@ module.exports = {
     FILE: {
         deviceJsonPath: pathToFileURL(__dirname + `/../output/${deviceListFileName}`),
         LogFilePath: pathToFileURL(__dirname + `/../output/${LogFileName}`),
+        ErrorLogFilePath: pathToFileURL(__dirname + `/../output/${ErrorLogFileName}`),
         saveOutputFrequency: process.env.SAVE_OUTPUT_FREQUENCY
     },
     MQTT: {
         publish_frequency: process.env.PUBLISH_FREQUENCY || "10",
         port: process.env.MQTT_PORT || "1883",
         testTime: process.env.TEST_TIME || 0,
+    },
+    BUFFER: {
+        connectDelay: process.env.CONNECT_DELAY || 5
     }
 }
