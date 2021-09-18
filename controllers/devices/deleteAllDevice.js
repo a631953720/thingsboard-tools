@@ -15,11 +15,10 @@ async function deleteAllDevice() {
                     'Content-Type': 'application/json'
                 }
             }
-            proxyToTB(opt);
+            await proxyToTB(opt);
         } catch (error) {
             throw error;
         }
-
     }
 }
 
