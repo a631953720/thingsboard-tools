@@ -16,7 +16,10 @@ MQTT_PORT= MQTT_port
 PUBLISH_FREQUENCY= MQTT_publish_data_frequency
 CONNECT_DELAY= MQTT_connect_delay
 TEST_TIME= MQTT_publish_data_times
+SEND_MOCK_DATA=true
+SUBSCRIBE_RPC=true
 SAVE_OUTPUT_FREQUENCY= save_output_every_some_seconds
+SAVE_LOG=true
 JWT_TOKEN= TB_tenant_jwt_token
 ```
 
