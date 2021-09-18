@@ -1,6 +1,6 @@
 const { DEVICE, MQTT, FILE, BUFFER } = require('../../constant/env');
 const { rawData } = require('../../helpers/mockData');
-const { initConnect } = require('./mqttConnector');
+const { initConnect, subscribeRPC } = require('./mqttConnector');
 const { saveTestInformation } = require('../../helpers/saveOutput');
 const { showLog } = require('../../helpers/showMsgOnLog');
 const { telemetryTopic } = require('../../constant/mqttTopic');
@@ -33,30 +33,39 @@ function publishData(config) {
 }
 
 function connectToTB(config) {
-    const { device, deviceListLength } = config;
+    console.log(config);
+    const { device, deviceListLength, isSendData, isSubscribeRPC } = config;
     const client = initConnect(device);
 
-    setTimeout(() => {
-        publishData({ ...config, client: client });
-    }, (connectDelay * deviceListLength));
+    if (isSendData) {
+        setTimeout(() => {
+            publishData({ ...config, client: client });
+        }, (connectDelay * deviceListLength));
+    }
+    
+    if (isSubscribeRPC) {
+        subscribeRPC(client);
+    }
+
 }
 
-function MQTTConnecter(frequency) {
+function MQTTConnecter(config) {
+    // const { frequency, isSendData } = config;
     const deviceListLength = deviceList.length;
 
     deviceList.forEach((device, idx) => {
-        const config = {
+        const connectConfig = {
+            ...config,
             device: device,
-            frequency: frequency,
             idx: idx,
-            deviceListLength: deviceListLength
+            deviceListLength: deviceListLength,
         };
 
         timeArr[idx] = 0;
 
         // Set timeout to avoid all device connect at the same time.
         setTimeout(() => {
-            connectToTB(config);
+            connectToTB(connectConfig);
         }, connectDelay * (idx + 1));
     });
 }
@@ -67,4 +76,6 @@ setInterval(() => {
     saveTestInformation(totalTimes);
 }, saveOutputFrequency);
 
-module.exports = MQTTConnecter;
+module.exports = {
+    MQTTConnecter
+};

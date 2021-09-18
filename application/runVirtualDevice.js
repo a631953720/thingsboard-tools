@@ -1,4 +1,12 @@
 const { MQTT } = require('../constant/env');
-const runTest = require('../controllers/mqtt/mqttClient');
+const { MQTTConnecter, publishData } = require('../controllers/mqtt/mqttClient');
 
-runTest(MQTT.publish_frequency * 1000);
+async function runTest() {
+    MQTTConnecter({
+        frequency: MQTT.publish_frequency * 1000,
+        isSendData: false,
+        isSubscribeRPC: true
+    });
+}
+
+runTest();
