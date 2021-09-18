@@ -26,7 +26,7 @@ module.exports = {
         errorLogFilePath: pathToFileURL(__dirname + `/../output/${ErrorLogFileName}`),
         RPCMessageLogFilePath: pathToFileURL(__dirname + `/../output/${RPCMessageLogFileName}`),
         JSWTokenFilePath: pathToFileURL(__dirname + `/../output/${JSWTokenFileName}`),
-        saveOutputFrequency: process.env.SAVE_OUTPUT_FREQUENCY,
+        saveOutputFrequency: process.env.SAVE_OUTPUT_FREQUENCY || 30,
         isSaveLog: process.env.SAVE_LOG || true
     },
     MQTT: {
