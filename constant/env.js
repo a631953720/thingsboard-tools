@@ -3,7 +3,7 @@ const { pathToFileURL } = require('url');
 require('dotenv').config();
 
 const deviceListFileName = 'deviceList.json';
-const LogFileName = 'Log.json';
+const LogFileName = `Log${Date.now()}.json`;
 
 module.exports = {
     SERVER: {
