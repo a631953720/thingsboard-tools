@@ -1,11 +1,11 @@
 const fs = require('fs');
 const { FILE, DEVICE } = require('../constant/env');
 const { showLog } = require('../helpers/showMsgOnLog');
-const deviceList = require(`../output/${DEVICE.deviceListFileName}`);
 
 function saveTestInformation(count) {
     showLog('Save output...');
 
+    const deviceList = require(`../output/${DEVICE.deviceListFileName}`);
     const jsonPath = FILE.logFilePath;
     const data = JSON.stringify({
         deviceCount: deviceList.length,
