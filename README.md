@@ -92,3 +92,23 @@ npm run device-start
 | SUBSCRIBE_RPC         | Virtual device will subscribe TB RPC topic                | false         |
 | SAVE_OUTPUT_FREQUENCY | Save program output every few seconds (s)                 | 30            |
 | SAVE_LOG              | Program will save output                                  | true          |
+
+## 7. Output folder
+
+### Folder tree
+After run init script, you can see `output` folder as follow.
+
+```bash
+output
+    ├─error
+    ├─mockData
+    └─RPC
+```
+
+### Folder description
+
+| Folder   | Description                          |
+|----------|--------------------------------------|
+| error    | Save device MQTT connect error log   |
+| mockData | Save device publish data information |
+| RPC      | Save device RPC message              |
