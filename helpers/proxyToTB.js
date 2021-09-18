@@ -3,7 +3,6 @@ const { SERVER } = require('../constant/env');
 const { saveTenantToken } = require('./saveOutput');
 
 let token;
-let isTokenEmpty = true;
 
 async function loginAdmin() {
     const opt = {
@@ -78,10 +77,6 @@ async function getTenantJWTToken() {
 
 async function proxyToTB(config) {
     token = token || await getTenantJWTToken();
-    if (isTokenEmpty) {
-        saveTenantToken(token);
-        isTokenEmpty = false;
-    }
     const _config = {
         ...config,
         headers: {
@@ -93,4 +88,7 @@ async function proxyToTB(config) {
     return APICaller(_config);
 }
 
-module.exports = proxyToTB;
+module.exports = {
+    proxyToTB,
+    getTenantJWTToken
+};

@@ -1,3 +1,4 @@
+// TODO 改善顯示方式
 function showLog(params) {
     console.info(params);
 }

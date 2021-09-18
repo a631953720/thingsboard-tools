@@ -1,4 +1,4 @@
-const proxyToTB = require('../../helpers/proxyToTB');
+const { proxyToTB } = require('../../helpers/proxyToTB');
 const { SERVER } = require('../../constant/env');
 
 async function getDeviceToken(deviceId) {
