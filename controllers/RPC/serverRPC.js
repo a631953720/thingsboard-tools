@@ -15,7 +15,7 @@ const messageList = {
  * @param {any} config.params RPC payload
  */
 
-async function serverTwoWayRPC(config) {
+async function serverTwoWayRPCToDevice(config) {
     try {
         const { deviceId, method, params } = config;
         const opt = {
@@ -33,16 +33,14 @@ async function serverTwoWayRPC(config) {
         const res = await proxyToTB({ ...opt });
 
         if (res.status >= 400) {
-            console.log(res.status, 123);
-            console.log(res.data, 123);
 
             messageList.error.push({ message: res.data });
             saveServerTwoWayRPCToDevice({
                 isError: true,
                 messageList: messageList
             });
+
         } else {
-            console.log(res);
 
             messageList.success.push({ message: res });
             saveServerTwoWayRPCToDevice({
@@ -57,5 +55,5 @@ async function serverTwoWayRPC(config) {
 }
 
 module.exports = {
-    serverTwoWayRPC
+    serverTwoWayRPCToDevice
 };

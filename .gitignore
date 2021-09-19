@@ -4,4 +4,5 @@ deviceList.json
 MockDataInfo*.json
 ErrorLog*.json
 RPCMessageLog*.json
+SendTwoWayRPCLog*.json
 JWTToken.txt
