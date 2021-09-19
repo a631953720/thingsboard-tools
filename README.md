@@ -228,7 +228,13 @@ By default, you need to add your device in `config` folder. Create `device.json`
 ```
 
 ### 2. Run script
-After add your device, run script to send RPC message. This tool will continuously send two way RPC to your device. Send message payload like as follow.
+After add your device, run script to send RPC message. 
+
+```bash
+npm run send-RPC
+```
+
+This tool will continuously send two way RPC to your device. Send message payload like as follow.
 
 ```json
 {
