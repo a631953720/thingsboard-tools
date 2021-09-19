@@ -170,6 +170,7 @@ npm run device-start
 
 ### 2. Get device id
 After add device, you can see `deviceList.json` as follow.
+
 Copy this device id.
 ```json
 [
