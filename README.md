@@ -23,7 +23,7 @@ After this tool execute for a while. Program will save output to json file.
 You can run this tool for a long time and keep recording the output results, so you don’t have to worry about program interruption.
 
 ## 5. Send RPC to your device
-You can send mock RPC to your device. F more details, see [Send RPC to single device](#SendRPC).
+You can send mock RPC to your device. For more details, see [Send RPC to single device](#SendRPC).
 
 
 # Before use this tool
