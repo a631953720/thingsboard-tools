@@ -32,7 +32,7 @@ function saveErrorDeviceList(errorDeviceList) {
     });
 }
 
-function saveRPCMessage(RPCMessageList) {
+function saveVirtualDeviceReceiveRPC(RPCMessageList) {
     showLog('Save RPC message...');
 
     const jsonPath = FILE.RPCMessageLogFilePath;
@@ -59,6 +59,6 @@ function saveTenantToken(token) {
 module.exports = {
     saveTestInformation,
     saveErrorDeviceList,
-    saveRPCMessage,
+    saveVirtualDeviceReceiveRPC,
     saveTenantToken
 };

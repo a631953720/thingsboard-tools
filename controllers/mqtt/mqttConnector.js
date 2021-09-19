@@ -1,7 +1,7 @@
 const mqtt = require('mqtt');
 const { showLog, showError } = require('../../helpers/showMsgOnLog');
 const { SERVER, MQTT, FILE } = require('../../constant/env');
-const { saveErrorDeviceList, saveRPCMessage } = require('../../helpers/saveOutput');
+const { saveErrorDeviceList, saveVirtualDeviceReceiveRPC } = require('../../helpers/saveOutput');
 const { serverRPCTopic, responseRPCTopic } = require('../../constant/mqttTopic');
 
 const RPCMessageList = [];
@@ -62,7 +62,7 @@ function subscribeRPC(client) {
 if (isSaveLog){
     setInterval(() => {
         saveErrorDeviceList(errorDeviceList);
-        saveRPCMessage(RPCMessageList)
+        saveVirtualDeviceReceiveRPC(RPCMessageList)
     }, saveOutputFrequency);
 }
 
