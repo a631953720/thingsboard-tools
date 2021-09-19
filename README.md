@@ -158,7 +158,7 @@ output
 
 
 ## 9. Config folder
-This folder is used to store device information. To more details, you can see [Send RPC to single device](#SendRPC)
+This folder is used to store device information. For more details, you can see [Send RPC to single device](#SendRPC)
 
 ## 10. Virtual device RPC test
 
