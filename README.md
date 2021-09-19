@@ -186,7 +186,7 @@ Copy this JWT token.
 Bearer token
 ```
 
-### 3. Call RPC server-side API
+### 4. Call RPC server-side API
 You can use postman to send a server-side RPC to virtual device. Send a HTTP POST request to the following URL.
 
 Paste the previously copied device id and JWT token to send RPC request.
@@ -211,7 +211,7 @@ set-gpio-request.json:
 }
 ```
 
-### 4. Virtual device response message
+### 5. Virtual device response message
 After receive server-side RPC, you can get the response as follow.
 ```json
 {
