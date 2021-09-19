@@ -122,10 +122,10 @@ npm run save-token
 | PUBLISH_FREQUENCY     | Virtual device publish data frequency (s)                 | 10            |
 | CONNECT_DELAY         | Virtual device connection delay (ms)                      | 5             |
 | TEST_TIME             | Virtual device publish data counts (0 is unlimited times) | 0             |
-| SEND_MOCK_DATA        | Virtual device will publish mock data                     | true          |
+| SEND_MOCK_DATA        | Virtual device will publish mock data                     | false         |
 | SUBSCRIBE_RPC         | Virtual device will subscribe TB RPC topic                | false         |
 | SAVE_OUTPUT_FREQUENCY | Save program output every few seconds (s)                 | 30            |
-| SAVE_LOG              | Program will save log to output folder                    | true          |
+| SAVE_LOG              | Program will save log to output folder                    | false         |
 
 ## 8. Output folder
 
