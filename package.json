@@ -9,7 +9,8 @@
     "add-device": "node ./application/initial.js",
     "remove-device": "node ./application/reset.js",
     "device-start": "node ./application/runVirtualDevice.js",
-    "save-token": "node ./application/saveToken.js"
+    "save-token": "node ./application/saveToken.js",
+    "send-RPC": "node ./application/sendTwoWayRPCToDevice.js"
   },
   "keywords": [],
   "author": "",
