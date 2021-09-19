@@ -1,5 +1,11 @@
 const { proxyToTB } = require('../../helpers/proxyToTB');
-const { SERVER, DEVICE } = require('../../constant/env');
+const { SERVER } = require('../../constant/env');
+const { saveServerTwoWayRPCToDevice } = require('../../helpers/saveOutput');
+
+const messageList = {
+    error: [],
+    success: []
+};
 
 /**
  * 
@@ -29,8 +35,20 @@ async function serverTwoWayRPC(config) {
         if (res.status >= 400) {
             console.log(res.status, 123);
             console.log(res.data, 123);
+
+            messageList.error.push({ message: res.data });
+            saveServerTwoWayRPCToDevice({
+                isError: true,
+                messageList: messageList
+            });
         } else {
             console.log(res);
+
+            messageList.success.push({ message: res });
+            saveServerTwoWayRPCToDevice({
+                isError: false,
+                messageList: messageList
+            });
         }
 
     } catch (error) {

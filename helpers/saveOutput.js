@@ -33,7 +33,7 @@ function saveErrorDeviceList(errorDeviceList) {
 }
 
 function saveVirtualDeviceReceiveRPC(RPCMessageList) {
-    showLog('Save RPC message...');
+    showLog('Save receiving RPC message...');
 
     const jsonPath = FILE.RPCMessageLogFilePath;
     const data = JSON.stringify({
@@ -56,9 +56,38 @@ function saveTenantToken(token) {
     });
 }
 
+function saveServerTwoWayRPCToDevice(config) {
+    showLog('Save receiving RPC message...');
+    const { isError, messageList } = config;
+
+    const jsonPath = FILE.sendTwoWayRPCLogFilePath;
+
+    if (isError) {
+        const data = JSON.stringify({
+            error: messageList,
+            updateTime: new Date().toLocaleString()
+        });
+
+        fs.writeFileSync(jsonPath, data, (err) => {
+            console.error('Data written to file error', err);
+        });
+    } else {
+        const data = JSON.stringify({
+            data: messageList,
+            updateTime: new Date().toLocaleString()
+        });
+
+        fs.writeFileSync(jsonPath, data, (err) => {
+            console.error('Data written to file error', err);
+        });
+    }
+
+}
+
 module.exports = {
     saveTestInformation,
     saveErrorDeviceList,
     saveVirtualDeviceReceiveRPC,
-    saveTenantToken
+    saveTenantToken,
+    saveServerTwoWayRPCToDevice
 };

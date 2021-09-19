@@ -7,11 +7,13 @@ const deviceListFileName = 'deviceList.json';
 const LogFileName = `mockData/MockDataInfo${Date.now()}.json`;
 const ErrorLogFileName = `error/ErrorLog${Date.now()}.json`;
 const RPCMessageLogFileName = `RPC/RPCMessageLog${Date.now()}.json`
+const twoWayRPCLogFileName = `RPC/SendTwoWayRPCLog${Date.now()}.json`
 
 module.exports = {
     SERVER: {
         host: process.env.HOST || '127.0.0.1',
-        port: process.env.PORT || '80'
+        port: process.env.PORT || '80',
+        isDebug : process.env.DEBUG || false
     },
     DEVICE: {
         deviceName: process.env.DEVICE_NAME || 'device',
@@ -26,6 +28,7 @@ module.exports = {
         logFilePath: pathToFileURL(__dirname + `/../output/${LogFileName}`),
         errorLogFilePath: pathToFileURL(__dirname + `/../output/${ErrorLogFileName}`),
         RPCMessageLogFilePath: pathToFileURL(__dirname + `/../output/${RPCMessageLogFileName}`),
+        sendTwoWayRPCLogFilePath: pathToFileURL(__dirname + `/../output/${twoWayRPCLogFileName}`),
         JSWTokenFilePath: pathToFileURL(__dirname + `/../output/${JSWTokenFileName}`),
         saveOutputFrequency: process.env.SAVE_OUTPUT_FREQUENCY || 30,
         isSaveLog: process.env.SAVE_LOG || true
