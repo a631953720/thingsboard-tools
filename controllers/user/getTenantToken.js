@@ -3,7 +3,7 @@ const {
     getTenantGroupId,
     getTenantId,
     getTenantToken
-} = require('./getTenantInfo');
+} = require('./userController');
 const { showLog } = require('../../helpers/showMsgOnLog');
 
 const { createTenantAccount } = require('./createTenants');
