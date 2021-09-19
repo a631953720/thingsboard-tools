@@ -1,7 +1,8 @@
 # What does this tool solve?
 
-## 1. Auto get and save tenant jwt token.
+## 1. Auto get and save tenant JWT token.
 This tool will auto login to TB. Users don't need to get tokens by themselves, and also to save the token to `output/JWTToken.txt`.
+If get JWT token error, this program will try to create a new tenant account to get a new JWT token.
 
 ## 2. Create virtual device to TB
 This tool will create device to TB.
@@ -23,6 +24,14 @@ You can run this tool for a long time and keep recording the output results, so 
 
 ## 5. Send RPC to your device
 You can send mock RPC to your device. To more details, see [Send RPC to single device](#SendRPC).
+
+
+# Before use this tool
+By default, this tool will auto login `admin account` and then get tenant JWT token. Admin account is TB default account as follow.
+```
+sysadmin@thingsboard.org
+sysadmin
+``` 
 
 # How to use
 
