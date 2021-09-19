@@ -1,4 +1,4 @@
-const { proxyToTB } = require('../user/proxyToTB');
+const { proxyToTB } = require('../api/proxyToTB');
 const { SERVER, DEVICE } = require('../../constant/env');
 
 const opt = {
