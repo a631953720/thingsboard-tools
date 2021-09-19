@@ -1,4 +1,4 @@
-const { getTenantJWTToken } = require('../helpers/proxyToTB');
+const { getTenantJWTToken } = require('../controllers/user/proxyToTB');
 const { saveTenantToken } = require('../helpers/saveOutput');
 
 async function saveTokenToFile() {

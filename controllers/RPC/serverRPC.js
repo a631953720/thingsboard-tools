@@ -1,4 +1,4 @@
-const { proxyToTB } = require('../../helpers/proxyToTB');
+const { proxyToTB } = require('../user/proxyToTB');
 const { SERVER,FILE } = require('../../constant/env');
 const { saveServerTwoWayRPCToDevice } = require('../../helpers/saveOutput');
 const { showLog } = require('../../helpers/showMsgOnLog');

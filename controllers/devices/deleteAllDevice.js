@@ -1,4 +1,4 @@
-const { proxyToTB } = require('../../helpers/proxyToTB');
+const { proxyToTB } = require('../user/proxyToTB');
 const { SERVER, DEVICE } = require('../../constant/env');
 
 async function deleteAllDevice() {

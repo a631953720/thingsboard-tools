@@ -1,6 +1,5 @@
-const APICaller = require('./apiCaller');
-const { SERVER } = require('../constant/env');
-const { saveTenantToken } = require('./saveOutput');
+const APICaller = require('../../helpers/apiCaller');
+const { SERVER } = require('../../constant/env');
 
 let token;
 
@@ -34,7 +33,6 @@ async function getTenantGroupId(token) {
     const response = await APICaller(opt);
     const tenantGroupId = response.data[0].id.id;
     return tenantGroupId;
-    // getTenantList(token, tenantGroupId);
 }
 
 async function getTenantId(token, tenantGroupId) {
