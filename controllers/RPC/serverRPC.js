@@ -1,5 +1,5 @@
 const { proxyToTB } = require('../../helpers/proxyToTB');
-const { SERVER } = require('../../constant/env');
+const { SERVER,FILE } = require('../../constant/env');
 const { saveServerTwoWayRPCToDevice } = require('../../helpers/saveOutput');
 const { showLog } = require('../../helpers/showMsgOnLog');
 
@@ -7,6 +7,18 @@ const messageList = {
     error: [],
     success: []
 };
+
+function saveRPCLog(config) {
+    const { isError, messageList } = config;
+    const isSaveLog= FILE.isSaveLog;
+
+    if(isSaveLog) {
+        saveServerTwoWayRPCToDevice({
+            isError,
+            messageList: messageList
+        });
+    }
+}
 
 /**
  * 
@@ -36,7 +48,7 @@ async function serverTwoWayRPCToDevice(config) {
         if (res.status >= 400) {
             showLog('RPC error...');
             messageList.error.push({ message: res.data });
-            saveServerTwoWayRPCToDevice({
+            saveRPCLog({
                 isError: true,
                 messageList: messageList
             });
@@ -44,7 +56,7 @@ async function serverTwoWayRPCToDevice(config) {
         } else {
             showLog('RPC success!');
             messageList.success.push({ message: res });
-            saveServerTwoWayRPCToDevice({
+            saveRPCLog({
                 isError: false,
                 messageList: messageList
             });
