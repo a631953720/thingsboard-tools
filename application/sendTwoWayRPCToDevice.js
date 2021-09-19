@@ -2,7 +2,7 @@ const { serverTwoWayRPCToDevice } = require('../controllers/RPC/serverRPC');
 const device = require('../config/device.json');
 
 async function sendTwoWayRPCToDevice() {
-    setInterval(()=>{
+    setInterval(() => {
         serverTwoWayRPCToDevice({
             deviceId: device.id,
             method: 'echo',
@@ -11,7 +11,7 @@ async function sendTwoWayRPCToDevice() {
                 test: 'test'
             }
         });
-    },11000)
+    }, 11000)
 }
 
 sendTwoWayRPCToDevice();
