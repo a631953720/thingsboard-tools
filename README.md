@@ -50,7 +50,7 @@ SAVE_LOG=true
 
 ### Run init script. 
 
-When script finish, you can see `output` folder has created.
+When script finish, you can see `output` and `config` folder has created.
 
 ```
 npm run init
@@ -144,7 +144,11 @@ output
 | mockData | Save device publish data information |
 | RPC      | Save device RPC message              |
 
-## 9. RPC test
+
+## 9. Config folder
+This folder is used to store device information. To more details, you can see [Send RPC to single device](#SendRPC)
+
+## 10. Virtual device RPC test
 
 ### 1. Subscribe RPC topic & Virtual device start
 Make sure that `.env` exist and set SUBSCRIBE_RPC=true.
@@ -201,5 +205,62 @@ After receive server-side RPC, you can get the response as follow.
         "value": 1,
         "isDone": true
     }
+}
+```
+
+<span id='SendRPC'></span>
+
+## 11. Send RPC to single device
+If you want to send a two way RPC to real device or third party service, you can use this tool for test.
+
+### 1. Add your device
+By default, you need to add your device in `config` folder. Create `device.json` file like as follow.
+
+```json
+{
+    "name":"TB device-name",
+    "id":"TB device-id",
+    "token":"TB device-access-token"
+}
+```
+
+### 2. Run script
+After add your device, run script to send RPC message. This tool will send two way RPC to your device. Send message payload like as follow.
+
+```json
+{
+    "method": "echo",
+    "params": {
+        "action": "echo",
+        "test": "test"
+    }
+}
+```
+
+### 3. Save logs
+When two way RPC API receive response, this tool will save response to `output/RPC/SendTwoWayRPCLog*.json`. 
+This tool can judge success or failure response and output then as follow.
+
+```json
+{
+    "data": {
+        "error": [
+            {
+                "message": {}
+            }
+        ],
+        "success": [
+            {
+                "message": {
+                    "method": "rpc test",
+                    "params": {
+                        "requestId": "20",
+                        "action": "echo"
+                    }
+                }
+            }
+        ]
+    },
+    "updateTime": "time"
 }
 ```
