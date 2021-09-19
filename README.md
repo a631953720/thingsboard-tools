@@ -179,6 +179,7 @@ Copy this device id.
 
 ### 3. Get JWT token
 After run save tenant token script, you can see `output/JWTToken.txt` as follow.
+
 Copy this JWT token.
 ```
 Bearer token
@@ -186,6 +187,7 @@ Bearer token
 
 ### 3. Call RPC server-side API
 You can use postman to send a server-side RPC to virtual device. Send a HTTP POST request to the following URL.
+
 Paste the previously copied device id and JWT token to send RPC request.
 ```
 http(s)://host:port/api/plugins/rpc/twoway/{deviceId}
