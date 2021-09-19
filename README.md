@@ -170,22 +170,23 @@ npm run device-start
 
 ### 2. Get device id
 After add device, you can see `deviceList.json` as follow.
+Copy this device id.
 ```json
 [
     {"name":"device-0","id":"83e8c0b0-18bc-11ec-bcd9-05ea625289ba","token":"QDHyEI5isiE7sRkqQKWj"}
 ]
 ```
-Copy this device id.
 
 ### 3. Get JWT token
 After run save tenant token script, you can see `output/JWTToken.txt` as follow.
+Copy this JWT token.
 ```
 Bearer token
 ```
-Copy this JWT token.
 
 ### 3. Call RPC server-side API
 You can use postman to send a server-side RPC to virtual device. Send a HTTP POST request to the following URL.
+Paste the previously copied device id and JWT token to send RPC request.
 ```
 http(s)://host:port/api/plugins/rpc/twoway/{deviceId}
 ```
