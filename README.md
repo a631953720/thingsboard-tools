@@ -18,12 +18,12 @@ You can get more information as TB document.
 https://thingsboard.io/docs/user-guide/rpc/
 
 ## 4. Save program output
-After this tool execute for a period of time. Program will save output to json file.
+After this tool execute for a while. Program will save output to json file.
 
 You can run this tool for a long time and keep recording the output results, so you don’t have to worry about program interruption.
 
 ## 5. Send RPC to your device
-You can send mock RPC to your device. To more details, see [Send RPC to single device](#SendRPC).
+You can send mock RPC to your device. F more details, see [Send RPC to single device](#SendRPC).
 
 
 # Before use this tool
@@ -109,7 +109,7 @@ SUBSCRIBE_RPC=true
 npm run device-start
 ```
 
-## 6 Save tenant token
+## 6. Save tenant token
 ### Save token to file
 After run this script, the token will save to `output/JWTToken.txt`
 
