@@ -16,15 +16,16 @@ async function APICaller(configs) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx
             
-            // console.log(error.response.data);
-            // console.log(error.response.status);
-            // console.log(error.response.headers);
-
-            return {
+            const errorMessage = {
                 ...defaultError,
                 status: error.response.status,
-                data: error.response.config
-            };
+                data: error.response.data,
+                url: error.response.config.url
+            }
+
+            console.error(errorMessage);
+
+            return errorMessage;
 
         } else if (error.request) {
             // The request was made but no response was received
