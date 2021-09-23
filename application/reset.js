@@ -1,10 +1,9 @@
 const { showLog } = require('../helpers/showMsgOnLog');
 const deleteAllDevice = require('../controllers/devices/deleteAllDevice');
 
-async function deleteTBDevice() {
+try {
     showLog('delete all devices...');
-    await deleteAllDevice();
-    showLog('done');
+    deleteAllDevice();
+} catch (error) {
+    console.error('deleteAllDevice error', error);
 }
-    
-deleteTBDevice()

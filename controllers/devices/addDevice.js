@@ -10,9 +10,9 @@ const opt = {
 }
 
 async function addDevices() {
+    const deviceIdList = [];
+    const { numberOfDevices, deviceName, deviceType, deviceLabel } = DEVICE;
     try {
-        const deviceIdList = [];
-        const { numberOfDevices, deviceName, deviceType, deviceLabel } = DEVICE;
         for (let i = 0; i < numberOfDevices; i++) {
             const deviceProfile = {
                 name: `${deviceName}-${i}`,
@@ -32,7 +32,7 @@ async function addDevices() {
         }
         return deviceIdList;
     } catch (error) {
-        console.error("[Add devices error]", error);
+        console.error("[add Devices Error]", error);
     }
 }
 
