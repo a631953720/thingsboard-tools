@@ -1,15 +1,35 @@
-# What does this tool solve?
 
-## 1. Auto get and save tenant JWT token.
-This tool will auto login to TB. Users don't need to get tokens by themselves, and also to save the token to `output/JWTToken.txt`.
+# Table
+- ### [What does this tool solve?](#G-Description)
+    <!-- - [Auto get and save tenant JWT token.](#G-Get-token)
+    - [Create virtual device to TB.](#G-Create-device)
+    - [Subscribe TB RPC topic.](#G-Subscribe-RPC)
+    - [Save program output.](#G-Save-output)
+    - [Send RPC to your device.](#G-Send-RPC) -->
+- ### [Before using this tool](#G-Before-used)
+- ### [Folder illustrate](#G-Folder-description)
+- ### [Command list](#G-Command-list)
+
+# What does this tool solve? <span id='G-Description'></span>
+
+## 1. Auto get and save tenant JWT token. 
+By default, this tool will auto login `admin account` and then get `tenant JWT token`. Admin account is `TB default account` as follow.
+```
+sysadmin@thingsboard.org
+sysadmin
+``` 
+
+So users don't need to get tokens by themselves, and also to save the token to `output/JWTToken.txt`.
+
 If get JWT token error, this program will try to create a new tenant account to get a new JWT token.
 
-## 2. Create virtual device to TB
+
+## 2. Create virtual device to TB 
 This tool will create device to TB.
 
 After create virtual device, you can send mock data or subscribe TB RPC topic. 
 
-## 3. Subscribe TB RPC topic
+## 3. Subscribe TB RPC topic 
 You can use this tool to observe how TB RPC work.
 
 If you set virtual device subscribe TB RPC topic. Virtual device will respond with a message to the server when receiving any server-side RPC request.
@@ -17,23 +37,15 @@ If you set virtual device subscribe TB RPC topic. Virtual device will respond wi
 You can get more information as TB document.
 https://thingsboard.io/docs/user-guide/rpc/
 
-## 4. Save program output
+## 4. Save program output 
 After this tool execute for a while. Program will save output to json file.
 
 You can run this tool for a long time and keep recording the output results, so you don’t have to worry about program interruption.
 
-## 5. Send RPC to your device
+## 5. Send RPC to your device 
 You can send mock RPC to your device. For more details, see [Send RPC to single device](#SendRPC).
 
-
-# How does this tool handle TB token?
-By default, this tool will auto login `admin account` and then get tenant JWT token. Admin account is TB default account as follow.
-```
-sysadmin@thingsboard.org
-sysadmin
-``` 
-
-# Before using this tool
+# Before using this tool <span id='G-Before-used'></span>
 
 ## 1. Install package
 ```
@@ -97,7 +109,7 @@ When script finish, you can see `output` and `config` folder has created. And th
 npm run init
 ```
 
-# Folder illustrate
+# Folder illustrate <span id='G-Folder-description'></span>
 
 ## 1. Output folder
 
@@ -124,7 +136,7 @@ output
 This folder is used to store device information. For more details, you can see [Send RPC to single device](#SendRPC)
 
 
-# Command list
+# Command list <span id='G-Command-list'></span>
 
 ## 1.Add & Remove device
 
@@ -142,7 +154,7 @@ npm run remove-device
 
 ## 2.Virtual device actions
 
-### Send mock data:
+### 2-1 Send mock data:
 
 Set `SEND_MOCK_DATA` true. This parameter will make virtual device to publish mock data to TB.
 
@@ -151,7 +163,7 @@ Set `SEND_MOCK_DATA` true. This parameter will make virtual device to publish mo
 SEND_MOCK_DATA=true
 ...
 ```
-### Subscribe RPC topic
+### 2-2 Subscribe RPC topic
 Set `SUBSCRIBE_RPC` true. This parameter will make virtual device to subscribe RPC topic to TB.
 
 ```
@@ -160,7 +172,7 @@ SUBSCRIBE_RPC=true
 ...
 ```
 
-### Start virtual device
+### 2-3 Start virtual device
 
 
 ```
@@ -169,13 +181,13 @@ npm run device-start
 
 ## 3.Virtual device RPC test
 
-### 1. Subscribe RPC topic & Virtual device start
+### 3-1. Subscribe RPC topic & Virtual device start
 Make sure that `.env` exist and set SUBSCRIBE_RPC=true.
 ```
 npm run device-start
 ```
 
-### 2. Get device id
+### 3-2. Get device id
 After add device, you can see `deviceList.json` as follow.
 
 Copy this device id.
@@ -185,7 +197,7 @@ Copy this device id.
 ]
 ```
 
-### 3. Get JWT token
+### 3-3. Get JWT token
 After run save tenant token script, you can see `output/JWTToken.txt` as follow.
 
 Copy this JWT token.
@@ -193,7 +205,7 @@ Copy this JWT token.
 Bearer token
 ```
 
-### 4. Call RPC server-side API
+### 3-4. Call RPC server-side API
 You can use postman to send a server-side RPC to virtual device. Send a HTTP POST request to the following URL.
 
 Paste the previously copied device id and JWT token to send RPC request.
@@ -218,7 +230,7 @@ set-gpio-request.json:
 }
 ```
 
-### 5. Virtual device response message
+### 3-5. Virtual device response message
 After receive server-side RPC, you can get the response as follow.
 ```json
 {
@@ -231,12 +243,11 @@ After receive server-side RPC, you can get the response as follow.
 }
 ```
 
-<span id='SendRPC'></span>
 
-## 4.Send RPC to single device
+## 4.Send RPC to single device <span id='SendRPC'></span>
 If you want to send a two way RPC to real device or third party service, you can use this tool for test.
 
-### 1. Add your device
+### 4-1. Add your device
 By default, you need to add your device in `config` folder. Create `device.json` file like as follow.
 
 ```json
@@ -247,7 +258,7 @@ By default, you need to add your device in `config` folder. Create `device.json`
 }
 ```
 
-### 2. Run script
+### 4-2. Run script
 After add your device, run script to send RPC message. 
 
 ```bash
@@ -266,7 +277,7 @@ This tool will continuously send two way RPC to your device. Send message payloa
 }
 ```
 
-### 3. Save logs
+### 4-3. Save logs
 When two way RPC API receive response, this tool will save response to `output/RPC/SendTwoWayRPCLog*.json`. 
 This tool can judge success or failure response and output then as follow.
 
