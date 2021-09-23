@@ -1,14 +1,14 @@
 
 # Table
-- ### [What does this tool solve?](#G-Description)
-    <!-- - [Auto get and save tenant JWT token.](#G-Get-token)
-    - [Create virtual device to TB.](#G-Create-device)
-    - [Subscribe TB RPC topic.](#G-Subscribe-RPC)
-    - [Save program output.](#G-Save-output)
-    - [Send RPC to your device.](#G-Send-RPC) -->
-- ### [Before using this tool](#G-Before-used)
-- ### [Folder illustrate](#G-Folder-description)
-- ### [Command list](#G-Command-list)
+#### 1. [What does this tool solve?](#G-Description)
+<!-- - [Auto get and save tenant JWT token.](#G-Get-token)
+- [Create virtual device to TB.](#G-Create-device)
+- [Subscribe TB RPC topic.](#G-Subscribe-RPC)
+- [Save program output.](#G-Save-output)
+- [Send RPC to your device.](#G-Send-RPC) -->
+#### 2. [Before using this tool](#G-Before-used)
+#### 3. [Folder illustrate](#G-Folder-description)
+#### 4. [Command list](#G-Command-list)
 
 # What does this tool solve? <span id='G-Description'></span>
 
