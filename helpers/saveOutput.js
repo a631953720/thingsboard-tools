@@ -49,7 +49,7 @@ function saveVirtualDeviceReceiveRPC(RPCMessageList) {
 function saveTenantToken(token) {
     showLog('Save token');
 
-    const filePath = FILE.JSWTokenFilePath;
+    const filePath = FILE.JWTokenFilePath;
 
     fs.writeFileSync(filePath, `Bearer ${token}`, (err) => {
         console.error('Data written to file error', err);

@@ -2,12 +2,13 @@ const { pathToFileURL } = require('url');
 
 require('dotenv').config();
 
-const JSWTokenFileName = 'JWTToken.txt';
+const JWTokenFileName = 'JWTToken.txt';
 const deviceListFileName = 'deviceList.json';
 const LogFileName = `mockData/MockDataInfo${Date.now()}.json`;
 const ErrorLogFileName = `error/ErrorLog${Date.now()}.json`;
 const RPCMessageLogFileName = `RPC/RPCMessageLog${Date.now()}.json`;
 const twoWayRPCLogFileName = `RPC/SendTwoWayRPCLog${Date.now()}.json`;
+const configDeviceFileName = 'device.json';
 
 module.exports = {
     SERVER: {
@@ -29,7 +30,8 @@ module.exports = {
         errorLogFilePath: pathToFileURL(__dirname + `/../output/${ErrorLogFileName}`),
         RPCMessageLogFilePath: pathToFileURL(__dirname + `/../output/${RPCMessageLogFileName}`),
         sendTwoWayRPCLogFilePath: pathToFileURL(__dirname + `/../output/${twoWayRPCLogFileName}`),
-        JSWTokenFilePath: pathToFileURL(__dirname + `/../output/${JSWTokenFileName}`),
+        JWTokenFilePath: pathToFileURL(__dirname + `/../output/${JWTokenFileName}`),
+        configDeviceFilePath: pathToFileURL(__dirname + `/../config/${configDeviceFileName}`),
         saveOutputFrequency: process.env.SAVE_OUTPUT_FREQUENCY || 30,
         isSaveLog: process.env.SAVE_LOG === 'true',
     },
