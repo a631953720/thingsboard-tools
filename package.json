@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "init": "mkdir config && mkdir output && cd output && mkdir RPC && mkdir mockData && mkdir error",
-    "add-device": "node ./application/initial.js",
-    "remove-device": "node ./application/reset.js",
+    "add-device": "node ./application/addDevice.js",
+    "remove-device": "node ./application/deleteDevice.js",
     "device-start": "node ./application/runVirtualDevice.js",
     "save-token": "node ./application/saveToken.js",
     "send-RPC": "node ./application/sendTwoWayRPCToDevice.js"
