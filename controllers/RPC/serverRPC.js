@@ -39,7 +39,8 @@ async function serverTwoWayRPCToDevice(config) {
             },
             data: JSON.stringify({
                 method: method,
-                params: params
+                params: params,
+                timeout: 30000
             })
         }
 
@@ -50,7 +51,7 @@ async function serverTwoWayRPCToDevice(config) {
             messageList.error.push({ message: res.data });
             saveRPCLog({
                 isError: true,
-                messageList: messageList
+                messageList: messageList.error
             });
 
         } else {
@@ -58,7 +59,7 @@ async function serverTwoWayRPCToDevice(config) {
             messageList.success.push({ message: res });
             saveRPCLog({
                 isError: false,
-                messageList: messageList
+                messageList: messageList.success
             });
         }
 
