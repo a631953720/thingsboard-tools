@@ -9,5 +9,5 @@ function showError(params) {
 
 module.exports = {
     showLog,
-    showError
+    showError,
 };

@@ -10,33 +10,32 @@ async function tryGetTokenAndResendRequest(config) {
         ...config,
         headers: {
             ...config.headers,
-            'X-Authorization': 'Bearer ' + token,
-        }
+            'X-Authorization': `Bearer ${token}`,
+        },
     });
 }
 
 async function proxyToTB(config) {
     try {
         token = token || await getTenantJWTToken();
-        const _config = {
+        const newConfig = {
             ...config,
             headers: {
                 ...config.headers,
-                'X-Authorization': 'Bearer ' + token,
-            }
-        }
+                'X-Authorization': `Bearer ${token}`,
+            },
+        };
         // 執行時間過長會出現token失效
-        const response = await APICaller(_config);
+        const response = await APICaller(newConfig);
 
-        if (response.status === 401) return tryGetTokenAndResendRequest(_config);
+        if (response.status === 401) return tryGetTokenAndResendRequest(newConfig);
 
         return response;
-
     } catch (error) {
         console.error('Proxy to TB error:', error);
     }
 }
 
 module.exports = {
-    proxyToTB
+    proxyToTB,
 };

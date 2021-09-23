@@ -7,12 +7,12 @@ async function createTenantGroup(adminToken) {
         url: `http://${SERVER.host}:${SERVER.port}/api/tenant`,
         headers: {
             'Content-Type': 'application/json',
-            'X-Authorization': 'Bearer ' + adminToken
+            'X-Authorization': `Bearer ${adminToken}`,
         },
         data: JSON.stringify({
-            title: "test"
-        })
-    }
+            title: 'test',
+        }),
+    };
     const response = await APICaller(opt);
     const tenantGroupId = response.id.id;
 
@@ -25,17 +25,17 @@ async function createTenant(token, tenantGroupId) {
         url: `http://${SERVER.host}:${SERVER.port}/api/user?sendActivationMail=false`,
         headers: {
             'Content-Type': 'application/json',
-            'X-Authorization': 'Bearer ' + token
+            'X-Authorization': `Bearer ${token}`,
         },
         data: JSON.stringify({
-            authority: "TENANT_ADMIN",
-            email: "test@gmail.com",
+            authority: 'TENANT_ADMIN',
+            email: 'test@gmail.com',
             tenantId: {
-                entityType: "TENANT",
-                id: tenantGroupId
-            }
-        })
-    }
+                entityType: 'TENANT',
+                id: tenantGroupId,
+            },
+        }),
+    };
     const response = await APICaller(opt);
     return response.id.id;
 }
@@ -43,10 +43,9 @@ async function createTenant(token, tenantGroupId) {
 async function createTenantAccount(adminToken) {
     const tenantGroupId = await createTenantGroup(adminToken);
     const tenantId = await createTenant(adminToken, tenantGroupId);
-    
     return tenantId;
 }
 
 module.exports = {
-    createTenantAccount
-}
+    createTenantAccount,
+};

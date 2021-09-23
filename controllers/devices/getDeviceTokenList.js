@@ -6,18 +6,19 @@ async function getDeviceTokenList(deviceList) {
 
         if (!Array.isArray(deviceList)) throw new Error('deviceList is not a array');
 
-        for (let i = 0; i < deviceList.length; i++) {
+        for (let i = 0; i < deviceList.length; i += 1) {
+            // eslint-disable-next-line no-await-in-loop
             const token = await getDeviceToken(deviceList[i].id);
             deviceTokenList.push({
                 name: deviceList[i].name,
                 id: deviceList[i].id,
-                token
+                token,
             });
         }
 
         return deviceTokenList;
     } catch (error) {
-        console.error("[Get device token list error]", error);
+        console.error('[Get device token list error]', error);
         return error;
     }
 }

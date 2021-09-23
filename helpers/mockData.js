@@ -4,11 +4,11 @@ function randomNum(params) {
 
 function rawData() {
     return {
-        "CPU.Usage": randomNum(100)
+        'CPU.Usage': randomNum(100),
     };
 }
 
 module.exports = {
     randomNum,
-    rawData
-}
+    rawData,
+};

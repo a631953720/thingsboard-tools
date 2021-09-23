@@ -4,6 +4,7 @@ const { initConnect, subscribeRPC } = require('./mqttConnector');
 const { saveTestInformation } = require('../../helpers/saveOutput');
 const { showLog } = require('../../helpers/showMsgOnLog');
 const { telemetryTopic } = require('../../constant/mqttTopic');
+// 要處理檔案不存在的問題，可能從init下手
 const deviceList = require(`../../output/${DEVICE.deviceListFileName}`);
 
 const timeArr = [];
@@ -13,7 +14,12 @@ const testTime = Number(MQTT.testTime);
 const isSaveLog = Boolean(FILE.isSaveLog);
 
 function publishData(config) {
-    const { client, device, frequency, idx } = config;
+    const {
+        client,
+        device,
+        frequency,
+        idx,
+    } = config;
 
     const timeId = setInterval(() => {
         const data = JSON.stringify(rawData());
@@ -29,24 +35,27 @@ function publishData(config) {
         }
 
         if (client.disconnected) clearInterval(timeId);
-
     }, frequency);
 }
 
 function connectToTB(config) {
-    const { device, deviceListLength, isSendData, isSubscribeRPC } = config;
+    const {
+        device,
+        deviceListLength,
+        isSendData,
+        isSubscribeRPC
+    } = config;
     const client = initConnect(device);
 
     if (isSendData) {
         setTimeout(() => {
-            publishData({ ...config, client: client });
+            publishData({ ...config, client });
         }, (connectDelay * deviceListLength));
     }
 
     if (isSubscribeRPC) {
         subscribeRPC(client);
     }
-
 }
 
 function MQTTConnecter(config) {
@@ -56,9 +65,9 @@ function MQTTConnecter(config) {
     deviceList.forEach((device, idx) => {
         const connectConfig = {
             ...config,
-            device: device,
-            idx: idx,
-            deviceListLength: deviceListLength,
+            device,
+            idx,
+            deviceListLength,
         };
 
         timeArr[idx] = 0;
@@ -79,5 +88,5 @@ if (isSaveLog) {
 }
 
 module.exports = {
-    MQTTConnecter
+    MQTTConnecter,
 };

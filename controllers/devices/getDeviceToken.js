@@ -7,13 +7,13 @@ async function getDeviceToken(deviceId) {
             method: 'get',
             url: `http://${SERVER.host}:${SERVER.port}/api/device/${deviceId}/credentials`,
             headers: {
-                'Content-Type': 'application/json'
-            }
-        }
+                'Content-Type': 'application/json',
+            },
+        };
         const res = await proxyToTB(opt);
-        return res['credentialsId'];
+        return res.credentialsId;
     } catch (error) {
-        console.error("[Get device token error]", error);
+        console.error('[Get device token error]', error);
         return error;
     }
 }

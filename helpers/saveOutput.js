@@ -1,16 +1,16 @@
 const fs = require('fs');
 const { FILE, DEVICE } = require('../constant/env');
-const { showLog } = require('../helpers/showMsgOnLog');
+const { showLog } = require('./showMsgOnLog');
 
 function saveTestInformation(count) {
     showLog('Save output...');
-
+    // 要處理檔案不存在的問題，可能從init下手
     const deviceList = require(`../output/${DEVICE.deviceListFileName}`);
     const jsonPath = FILE.logFilePath;
     const data = JSON.stringify({
         deviceCount: deviceList.length,
         testCount: count,
-        updateTime: new Date().toLocaleString()
+        updateTime: new Date().toLocaleString(),
     });
 
     fs.writeFileSync(jsonPath, data, (err) => {
@@ -24,7 +24,7 @@ function saveErrorDeviceList(errorDeviceList) {
     const jsonPath = FILE.errorLogFilePath;
     const data = JSON.stringify({
         ...errorDeviceList,
-        updateTime: new Date().toLocaleString()
+        updateTime: new Date().toLocaleString(),
     });
 
     fs.writeFileSync(jsonPath, data, (err) => {
@@ -38,7 +38,7 @@ function saveVirtualDeviceReceiveRPC(RPCMessageList) {
     const jsonPath = FILE.RPCMessageLogFilePath;
     const data = JSON.stringify({
         ...RPCMessageList,
-        updateTime: new Date().toLocaleString()
+        updateTime: new Date().toLocaleString(),
     });
 
     fs.writeFileSync(jsonPath, data, (err) => {
@@ -65,7 +65,7 @@ function saveServerTwoWayRPCToDevice(config) {
     if (isError) {
         const data = JSON.stringify({
             error: messageList,
-            updateTime: new Date().toLocaleString()
+            updateTime: new Date().toLocaleString(),
         });
 
         fs.writeFileSync(jsonPath, data, (err) => {
@@ -74,14 +74,13 @@ function saveServerTwoWayRPCToDevice(config) {
     } else {
         const data = JSON.stringify({
             data: messageList,
-            updateTime: new Date().toLocaleString()
+            updateTime: new Date().toLocaleString(),
         });
 
         fs.writeFileSync(jsonPath, data, (err) => {
             console.error('Data written to file error', err);
         });
     }
-
 }
 
 module.exports = {
@@ -89,5 +88,5 @@ module.exports = {
     saveErrorDeviceList,
     saveVirtualDeviceReceiveRPC,
     saveTenantToken,
-    saveServerTwoWayRPCToDevice
+    saveServerTwoWayRPCToDevice,
 };

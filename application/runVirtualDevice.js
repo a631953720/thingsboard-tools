@@ -7,7 +7,7 @@ async function runTest() {
     MQTTConnecter({
         frequency: MQTT.publish_frequency * 1000,
         isSendData,
-        isSubscribeRPC
+        isSubscribeRPC,
     });
 }
 

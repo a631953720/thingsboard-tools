@@ -6,5 +6,5 @@ async function deleteTBDevice() {
     await deleteAllDevice();
     showLog('done');
 }
-    
-deleteTBDevice()
+
+deleteTBDevice();

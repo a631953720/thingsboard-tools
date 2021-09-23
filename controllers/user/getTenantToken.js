@@ -2,7 +2,7 @@ const {
     loginAdmin,
     getTenantGroupId,
     getTenantId,
-    getTenantToken
+    getTenantToken,
 } = require('./userController');
 const { showLog } = require('../../helpers/showMsgOnLog');
 
@@ -29,5 +29,5 @@ async function getTenantJWTToken() {
 }
 
 module.exports = {
-    getTenantJWTToken
+    getTenantJWTToken,
 };

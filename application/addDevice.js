@@ -1,7 +1,8 @@
+const fs = require('fs');
+
 const addDevices = require('../controllers/devices/addDevice');
 const getDeviceTokenList = require('../controllers/devices/getDeviceTokenList');
 const { showLog } = require('../helpers/showMsgOnLog');
-const fs = require('fs');
 const { FILE } = require('../constant/env');
 
 async function initTBDevices() {
@@ -16,7 +17,7 @@ async function initTBDevices() {
     fs.writeFileSync(jsonPath, data, (err) => {
         console.error('Data written to file error', err);
     });
-    
+
     showLog('done');
 }
 
