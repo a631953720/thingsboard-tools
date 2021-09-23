@@ -20,5 +20,10 @@
     "dotenv": "^8.2.0",
     "mqtt": "^4.2.8",
     "node": "^15.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2"
   }
 }
