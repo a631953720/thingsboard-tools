@@ -26,7 +26,7 @@ You can run this tool for a long time and keep recording the output results, so 
 You can send mock RPC to your device. For more details, see [Send RPC to single device](#SendRPC).
 
 
-# Before use this tool
+# How does this tool handle TB token?
 By default, this tool will auto login `admin account` and then get tenant JWT token. Admin account is TB default account as follow.
 ```
 sysadmin@thingsboard.org
