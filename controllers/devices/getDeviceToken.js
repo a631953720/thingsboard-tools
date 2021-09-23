@@ -13,7 +13,7 @@ async function getDeviceToken(deviceId) {
         const res = await proxyToTB(opt);
         return res['credentialsId'];
     } catch (error) {
-        console.error("[get device token Error]", error);
+        console.error("[Get device token error]", error);
         return error;
     }
 }
