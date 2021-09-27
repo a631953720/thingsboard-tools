@@ -1,6 +1,21 @@
 const axios = require('axios');
 const { defaultError } = require('../constant/defaultError');
 
+/**
+ * @typedef {object} defaultError Default error object
+ * @property {number} status
+ * @property {object} data
+ * @property {string} data.message
+ */
+
+/**
+ * Call API by axios
+ * @param {object} configs Http request options
+ * @param {string} configs.method
+ * @param {string} configs.url
+ * @param {object} configs.headers
+ * @returns {Promise | defaultError} If request successful return data, else return default error
+ */
 async function APICaller(configs) {
     try {
         const res = await axios(configs);

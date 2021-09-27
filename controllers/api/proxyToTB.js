@@ -5,26 +5,40 @@ const { defaultError } = require('../../constant/defaultError');
 let token;
 
 // add error handler
-
-async function tryGetTokenAndResendRequest(config) {
+async function tryGetTokenAndResendRequest(configs) {
     token = await getTenantJWTToken();
     // response token or error object.
     return APICaller({
-        ...config,
+        ...configs,
         headers: {
-            ...config.headers,
+            ...configs.headers,
             'X-Authorization': `Bearer ${token}`,
         },
     });
 }
 
-async function proxyToTB(config) {
+/**
+ * @typedef {object} defaultError Default error object
+ * @property {number} status
+ * @property {object} data
+ * @property {string} data.message
+ */
+
+/**
+ * Proxy API request to thingsboard
+ * @param {object} configs Http request options
+ * @param {string} configs.method
+ * @param {string} configs.url
+ * @param {object} configs.headers
+ * @returns {Promise | defaultError} If request successful return data, else return default error
+ */
+async function proxyToTB(configs) {
     try {
         token = token || await getTenantJWTToken();
         const newConfig = {
-            ...config,
+            ...configs,
             headers: {
-                ...config.headers,
+                ...configs.headers,
                 'X-Authorization': `Bearer ${token}`,
             },
         };
