@@ -1,3 +1,4 @@
+const path = require('path');
 const { pathToFileURL } = require('url');
 
 require('dotenv').config();
@@ -25,13 +26,13 @@ module.exports = {
         deviceListFileName,
     },
     FILE: {
-        deviceJsonPath: pathToFileURL(__dirname + `/../output/${deviceListFileName}`),
-        logFilePath: pathToFileURL(__dirname + `/../output/${LogFileName}`),
-        errorLogFilePath: pathToFileURL(__dirname + `/../output/${ErrorLogFileName}`),
-        RPCMessageLogFilePath: pathToFileURL(__dirname + `/../output/${RPCMessageLogFileName}`),
-        sendTwoWayRPCLogFilePath: pathToFileURL(__dirname + `/../output/${twoWayRPCLogFileName}`),
-        JWTokenFilePath: pathToFileURL(__dirname + `/../output/${JWTokenFileName}`),
-        configDeviceFilePath: pathToFileURL(__dirname + `/../config/${configDeviceFileName}`),
+        deviceJsonPath: pathToFileURL(path.join(__dirname, `/../output/${deviceListFileName}`)),
+        logFilePath: pathToFileURL(path.join(__dirname, `/../output/${LogFileName}`)),
+        errorLogFilePath: pathToFileURL(path.join(__dirname, `/../output/${ErrorLogFileName}`)),
+        RPCMessageLogFilePath: pathToFileURL(path.join(__dirname, `/../output/${RPCMessageLogFileName}`)),
+        sendTwoWayRPCLogFilePath: pathToFileURL(path.join(__dirname, `/../output/${twoWayRPCLogFileName}`)),
+        JWTokenFilePath: pathToFileURL(path.join(__dirname, `/../output/${JWTokenFileName}`)),
+        configDeviceFilePath: pathToFileURL(path.join(__dirname, `/../config/${configDeviceFileName}`)),
         saveOutputFrequency: process.env.SAVE_OUTPUT_FREQUENCY || 30,
         isSaveLog: process.env.SAVE_LOG === 'true',
     },
