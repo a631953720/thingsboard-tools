@@ -10,36 +10,36 @@ const opt = {
 };
 
 async function addDevices() {
-    try {
-        const deviceIdList = [];
-        const {
-            numberOfDevices,
-            deviceName,
-            deviceType,
-            deviceLabel,
-        } = DEVICE;
-        for (let i = 0; i < numberOfDevices; i += 1) {
-            const deviceProfile = {
-                name: `${deviceName}-${i}`,
-                type: deviceType,
-                label: deviceLabel,
-            };
+    const deviceIdList = [];
+    const {
+        numberOfDevices,
+        deviceName,
+        deviceType,
+        deviceLabel,
+    } = DEVICE;
+    for (let i = 0; i < numberOfDevices; i += 1) {
+        const deviceProfile = {
+            name: `${deviceName}-${i}`,
+            type: deviceType,
+            label: deviceLabel,
+        };
 
-            // eslint-disable-next-line no-await-in-loop
-            const res = await proxyToTB({
-                ...opt,
-                data: JSON.stringify(deviceProfile),
-            });
+        // eslint-disable-next-line no-await-in-loop
+        const response = await proxyToTB({
+            ...opt,
+            data: JSON.stringify(deviceProfile),
+        });
 
-            deviceIdList.push({
-                name: res.name,
-                id: res.id.id,
-            });
+        if (response.status >= 400) {
+            return [];
         }
-        return deviceIdList;
-    } catch (error) {
-        console.error('[Add devices error]', error);
+
+        deviceIdList.push({
+            name: response.name,
+            id: response.id.id,
+        });
     }
+    return deviceIdList;
 }
 
 module.exports = addDevices;
