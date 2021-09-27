@@ -25,19 +25,19 @@ async function addDevices() {
         };
 
         // eslint-disable-next-line no-await-in-loop
-        const res = await proxyToTB({
+        const response = await proxyToTB({
             ...opt,
             data: JSON.stringify(deviceProfile),
         });
 
-        if (res.status >= 400) {
-            console.log(res);
+        if (response.status >= 400) {
+            console.log(response);
             return [];
         }
 
         deviceIdList.push({
-            name: res.name,
-            id: res.id.id,
+            name: response.name,
+            id: response.id.id,
         });
     }
     return deviceIdList;
