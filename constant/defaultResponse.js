@@ -5,4 +5,10 @@ module.exports = {
             message: 'Untreated error',
         },
     },
+    defaultSuccess: {
+        status: 200,
+        data: {
+            message: 'Request success',
+        },
+    },
 };
