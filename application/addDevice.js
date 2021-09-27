@@ -6,19 +6,26 @@ const { showLog } = require('../helpers/showMsgOnLog');
 const { FILE } = require('../constant/env');
 
 async function initTBDevices() {
-    showLog('add devices...');
+    showLog('Add devices...');
 
     const jsonPath = FILE.deviceJsonPath;
     const deviceList = await getDeviceTokenList(await addDevices());
     const data = JSON.stringify(deviceList);
 
-    showLog('output json file');
+    if (Array.isArray(deviceList)) {
+        if (deviceList.length < 1) {
+            showLog('Add devices error');
+            return;
+        }
 
-    fs.writeFileSync(jsonPath, data, (err) => {
-        console.error('Data written to file error', err);
-    });
+        showLog('Output json file');
 
-    showLog('done');
+        fs.writeFileSync(jsonPath, data, (err) => {
+            console.error('Data written to file error', err);
+        });
+
+        showLog('Done');
+    }
 }
 
 initTBDevices();
