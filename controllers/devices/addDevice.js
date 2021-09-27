@@ -31,7 +31,6 @@ async function addDevices() {
         });
 
         if (response.status >= 400) {
-            console.log(response);
             return [];
         }
 
