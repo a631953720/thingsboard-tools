@@ -1,6 +1,6 @@
 const APICaller = require('../../helpers/apiCaller');
 const { getTenantJWTToken } = require('../user/getTenantToken');
-const { defaultError } = require('../../constant/defaultError');
+const { defaultError } = require('../../constant/defaultResponse');
 
 let token;
 

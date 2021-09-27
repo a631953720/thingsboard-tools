@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { defaultError } = require('../constant/defaultError');
+const { defaultError } = require('../constant/defaultResponse');
 
 /**
  * @typedef {object} defaultError Default error object
