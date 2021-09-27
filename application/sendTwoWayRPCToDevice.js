@@ -8,10 +8,10 @@ async function sendTwoWayRPCToDevice() {
             method: 'echo',
             params: {
                 action: 'echo',
-                test: 'test'
-            }
+                test: 'test',
+            },
         });
-    }, 11000)
+    }, 11000);
 }
 
 sendTwoWayRPCToDevice();
