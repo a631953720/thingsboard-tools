@@ -1,30 +1,17 @@
-const fs = require('fs');
-
 const addDevices = require('../controllers/devices/addDevice');
-const getDeviceTokenList = require('../controllers/devices/getDeviceTokenList');
+const saveDeviceListToJsonFile = require('../controllers/devices/saveDeviceToJson');
 const { showLog } = require('../helpers/showMsgOnLog');
-const { FILE } = require('../constant/env');
 
 async function initTBDevices() {
     showLog('Add devices...');
 
-    const jsonPath = FILE.deviceJsonPath;
-    const deviceList = await getDeviceTokenList(await addDevices());
-    const data = JSON.stringify(deviceList);
+    const deviceList = await addDevices();
 
-    if (Array.isArray(deviceList)) {
-        if (deviceList.length < 1) {
-            showLog('Add devices error');
-            return;
-        }
-
-        showLog('Output json file');
-
-        fs.writeFileSync(jsonPath, data, (err) => {
-            console.error('Data written to file error', err);
-        });
-
+    if (deviceList.length > 0) {
+        await saveDeviceListToJsonFile(deviceList);
         showLog('Done');
+    } else {
+        showLog('Add devices error');
     }
 }
 
