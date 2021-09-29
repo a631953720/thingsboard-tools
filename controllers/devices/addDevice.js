@@ -1,5 +1,6 @@
 const { proxyToTB } = require('../api/proxyToTB');
 const { SERVER, DEVICE } = require('../../constant/env');
+const getDeviceTokenList = require('./getDeviceTokenList');
 
 const opt = {
     method: 'post',
@@ -9,7 +10,7 @@ const opt = {
     },
 };
 
-async function addDevices() {
+async function addDevicesAndGetDeviceList() {
     const deviceIdList = [];
     const {
         numberOfDevices,
@@ -42,4 +43,9 @@ async function addDevices() {
     return deviceIdList;
 }
 
-module.exports = addDevices;
+async function getAllDeviceAccessTokenList() {
+    const deviceList = await addDevicesAndGetDeviceList();
+    return getDeviceTokenList(deviceList);
+}
+
+module.exports = getAllDeviceAccessTokenList;
