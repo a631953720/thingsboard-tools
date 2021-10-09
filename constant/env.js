@@ -16,6 +16,9 @@ module.exports = {
         host: process.env.HOST || '127.0.0.1',
         port: process.env.PORT || '80',
         isDebug: process.env.DEBUG === 'true',
+        tenantGroupName: 'thingsboard-tools-tenant-group',
+        tenantName: 'thingsboard-tools-tenant',
+        tenantEmail: 'test@gmail.com',
     },
     DEVICE: {
         deviceName: process.env.DEVICE_NAME || 'device',

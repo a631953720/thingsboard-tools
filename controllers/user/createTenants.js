@@ -3,17 +3,25 @@ const { jsonStringify } = require('../../helpers/jsonHandler');
 const { showDebugLog } = require('../../helpers/showMsgOnLog');
 const { SERVER } = require('../../constant/env');
 
+const {
+    tenantEmail,
+    tenantGroupName,
+    tenantName,
+} = SERVER;
+
 const tenantGroupProfile = {
-    title: 'test',
+    title: tenantGroupName,
 };
 
 const getTenantProfile = (tenantGroupId) => ({
     authority: 'TENANT_ADMIN',
-    email: 'test@gmail.com',
+    email: tenantEmail,
     tenantId: {
         entityType: 'TENANT',
         id: tenantGroupId,
     },
+    firstName: 'test',
+    lastName: tenantName,
 });
 
 async function createTenantGroup(adminToken) {

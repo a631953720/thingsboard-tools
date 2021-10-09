@@ -7,6 +7,7 @@ const adminAccount = {
     username: 'sysadmin@thingsboard.org',
     password: 'sysadmin',
 };
+const { tenantGroupName, tenantEmail } = SERVER;
 
 async function loginAdmin() {
     const opt = {
@@ -25,7 +26,7 @@ async function loginAdmin() {
 async function getTenantGroupId(token) {
     const opt = {
         method: 'get',
-        url: `http://${SERVER.host}:${SERVER.port}/api/tenants?pageSize=10&page=0&sortProperty=createdTime&sortOrder=DESC`,
+        url: `http://${SERVER.host}:${SERVER.port}/api/tenants?pageSize=10&page=0&sortProperty=createdTime&sortOrder=DESC&textSearch=${tenantGroupName}`,
         headers: {
             'Content-Type': 'application/json',
             'X-Authorization': `Bearer ${token}`,
@@ -40,7 +41,7 @@ async function getTenantGroupId(token) {
 async function getTenantId(token, tenantGroupId) {
     const opt = {
         method: 'get',
-        url: `http://${SERVER.host}:${SERVER.port}/api/tenant/${tenantGroupId}/users?pageSize=10&page=0&sortProperty=createdTime&sortOrder=DESC`,
+        url: `http://${SERVER.host}:${SERVER.port}/api/tenant/${tenantGroupId}/users?pageSize=10&page=0&sortProperty=createdTime&sortOrder=DESC&textSearch=${tenantEmail}`,
         headers: {
             'Content-Type': 'application/json',
             'X-Authorization': `Bearer ${token}`,
