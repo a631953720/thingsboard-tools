@@ -6,12 +6,12 @@ const { jsonStringify } = require('../../helpers/jsonHandler');
 const {
     tenantGroupName,
     tenantEmail,
-    adminAccount,
+    adminEmail,
     adminPassword,
 } = SERVER;
 
 const adminProfile = {
-    username: adminAccount,
+    username: adminEmail,
     password: adminPassword,
 };
 

@@ -16,11 +16,11 @@ module.exports = {
         host: process.env.HOST || '127.0.0.1',
         port: process.env.PORT || '80',
         isDebug: process.env.DEBUG === 'true',
-        adminAccount: process.env.ADMIN_ACCOUNT || 'sysadmin@thingsboard.org',
+        adminEmail: process.env.ADMIN_EMAIL || 'sysadmin@thingsboard.org',
         adminPassword: process.env.ADMIN_PASSWORD || 'sysadmin',
+        tenantEmail: process.env.TENANT_EMAIL || 'test@gmail.com',
         tenantGroupName: process.env.TENANT_GROUP_NAME || 'thingsboard-tools-tenant-group',
         tenantName: process.env.TENANT_NAME || 'thingsboard-tools-tenant',
-        tenantEmail: process.env.TENANT_EMAIL || 'test@gmail.com',
     },
     DEVICE: {
         deviceName: process.env.DEVICE_NAME || 'device',
