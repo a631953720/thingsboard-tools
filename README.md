@@ -57,6 +57,11 @@ npm i
 # TB server ip & post
 HOST= TB_server_host
 PORT= TB_server_port
+ADMIN_ACCOUNT= Admin_email
+ADMIN_PASSWORD= Admin_password
+TENANT_GROUP_NAME= Tenant_group_name
+TENANT_NAME= Tenant_name
+TENANT_EMAIL= Tenant_email
 
 # Device settings
 NUMBER_OF_DEVICES= TB_device_counts
@@ -88,6 +93,11 @@ DEBUG=false
 |-----------------------|-----------------------------------------------------------|---------------|
 | HOST                  | TB server host                                            | 127.0.0.1     |
 | PORT                  | TB server port                                            | 80            |
+| ADMIN_EMAIL           | Admin email                                               | sysadmin@thingsboard.org |
+| ADMIN_PASSWORD        | Admin password                                            | sysadmin      |
+| TENANT_EMAIL          | Tenant email                                              | test@gmail.com |
+| TENANT_GROUP_NAME     | Tenant group name                                         | thingsboard-tools-tenant-group |
+| TENANT_NAME           | Tenant name                                               | thingsboard-tools-tenant |
 | NUMBER_OF_DEVICES     | Virtual device count                                      | 1             |
 | DEVICE_NAME           | Virtual device name in TB                                 | device        |
 | DEVICE_TYPE           | Virtual device type in TB                                 | default       |
