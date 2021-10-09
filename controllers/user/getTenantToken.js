@@ -20,7 +20,6 @@ async function getTenantJWTToken() {
     } catch (error) {
         // When get tenantToken error, try create new tenant.
         showWarningLog('Get tenant JWT token', 'Get tenant token error. Try to create new tenant account!!!');
-        showDebugLog('Get tenant JWT token', 'Get tenant token error...');
         showDebugLog('Get tenant JWT token', 'Try to create new tenant account');
         const tenantId = await createTenantAccount(adminToken);
         tenantToken = await getTenantToken(adminToken, tenantId);
