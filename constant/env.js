@@ -19,6 +19,8 @@ module.exports = {
         tenantGroupName: 'thingsboard-tools-tenant-group',
         tenantName: 'thingsboard-tools-tenant',
         tenantEmail: 'test@gmail.com',
+        adminAccount: 'sysadmin@thingsboard.org',
+        adminPassword: 'sysadmin',
     },
     DEVICE: {
         deviceName: process.env.DEVICE_NAME || 'device',

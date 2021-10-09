@@ -5,12 +5,14 @@ const {
     getTenantToken,
 } = require('./userController');
 const { showDebugLog, showWarningLog } = require('../../helpers/showMsgOnLog');
-
 const { createTenantAccount } = require('./createTenants');
 
 async function getTenantJWTToken() {
-    const adminToken = await loginAdmin();
     let tenantToken;
+    const adminToken = await loginAdmin();
+
+    if (!adminToken) return '';
+
     try {
         showDebugLog('Get tenant JWT token', 'Try to get tenant token...');
         // If tenant group exist, this program will success

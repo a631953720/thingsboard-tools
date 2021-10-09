@@ -3,11 +3,17 @@ const { SERVER } = require('../../constant/env');
 const { showDebugLog } = require('../../helpers/showMsgOnLog');
 const { jsonStringify } = require('../../helpers/jsonHandler');
 
-const adminAccount = {
-    username: 'sysadmin@thingsboard.org',
-    password: 'sysadmin',
+const {
+    tenantGroupName,
+    tenantEmail,
+    adminAccount,
+    adminPassword,
+} = SERVER;
+
+const adminProfile = {
+    username: adminAccount,
+    password: adminPassword,
 };
-const { tenantGroupName, tenantEmail } = SERVER;
 
 async function loginAdmin() {
     const opt = {
@@ -16,9 +22,9 @@ async function loginAdmin() {
         headers: {
             'Content-Type': 'application/json',
         },
-        data: jsonStringify(adminAccount),
+        data: jsonStringify(adminProfile),
     };
-    showDebugLog('Login admin', 'Login admin account', adminAccount);
+    showDebugLog('Login admin', 'Login admin account', adminProfile);
     const response = await APICaller(opt);
     return response.token;
 }
