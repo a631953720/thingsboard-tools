@@ -7,7 +7,7 @@ const tenantGroupProfile = {
     title: 'test',
 };
 
-const tenantProfile = (tenantGroupId) => ({
+const getTenantProfile = (tenantGroupId) => ({
     authority: 'TENANT_ADMIN',
     email: 'test@gmail.com',
     tenantId: {
@@ -33,7 +33,7 @@ async function createTenantGroup(adminToken) {
 }
 
 async function createTenant(token, tenantGroupId) {
-    const profile = tenantProfile(tenantGroupId);
+    const profile = getTenantProfile(tenantGroupId);
     const opt = {
         method: 'post',
         url: `http://${SERVER.host}:${SERVER.port}/api/user?sendActivationMail=false`,
