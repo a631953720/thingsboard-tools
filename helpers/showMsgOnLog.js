@@ -3,6 +3,7 @@ const {
     format,
     transports,
 } = require('winston');
+const { SERVER } = require('../constant/env');
 
 const {
     combine,
@@ -11,9 +12,6 @@ const {
     prettyPrint,
     simple,
 } = format;
-
-const { SERVER } = require('../constant/env');
-
 const { isDebug } = SERVER;
 
 const showSimpleMessage = createLogger({
