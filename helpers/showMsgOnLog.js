@@ -9,28 +9,47 @@ const {
     combine,
     timestamp,
     label,
-    prettyPrint,
     simple,
+    colorize,
+    printf,
+    prettyPrint,
 } = format;
 const { isDebug } = SERVER;
 
+// Modify log format and colors
+const alignColorsAndTime = (logType = '') => (
+    combine(
+        label({ label: logType }),
+        colorize({
+            all: true,
+        }),
+        timestamp({
+            format: 'YYYY-MM-DD HH:MM:SS',
+        }),
+        printf(
+            (info) => (`${info.level} ${info.timestamp} [${info.label}]: ${info.message} `),
+        ),
+    )
+);
+
 // This logger will show information to user
 const showSimpleMessage = createLogger({
-    format: simple(),
+    format: combine(
+        colorize(),
+        simple(),
+    ),
     transports: [new transports.Console()],
 });
 
 // This logger will show log likes debug, warning, error, etc...
 const commonLoggerConfig = (logType = '') => (
     createLogger({
-        format: combine(
-            label({ label: logType }),
-            timestamp(),
-            prettyPrint(),
-        ),
         transports: [
-            new transports.Console(),
+            new transports.Console({
+                format: alignColorsAndTime(logType),
+            }),
             new transports.File({
+                format: prettyPrint(), // Log file don't need color!
                 filename: './output/error.log',
                 level: 'error',
             }),
