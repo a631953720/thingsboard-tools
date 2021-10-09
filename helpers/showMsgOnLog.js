@@ -1,75 +1,33 @@
-const {
-    createLogger,
-    format,
-    transports,
-} = require('winston');
 const { SERVER } = require('../constant/env');
-
 const {
-    combine,
-    timestamp,
-    label,
-    simple,
-    colorize,
-    printf,
-    prettyPrint,
-} = format;
+    showSimpleMessage,
+    commonLoggerConfig,
+} = require('./basicLogger');
+
 const { isDebug } = SERVER;
 
-// Modify log format and colors
-const alignColorsAndTime = (logType = '') => (
-    combine(
-        label({ label: logType }),
-        colorize({
-            all: true,
-        }),
-        timestamp({
-            format: 'YYYY-MM-DD HH:MM:SS',
-        }),
-        printf(
-            (info) => (`${info.level} ${info.timestamp} [${info.label}]: ${info.message} `),
-        ),
-    )
-);
-
-// This logger will show information to user
-const showSimpleMessage = createLogger({
-    format: combine(
-        colorize(),
-        simple(),
-    ),
-    transports: [new transports.Console()],
-});
-
-// This logger will show log likes debug, warning, error, etc...
-const commonLoggerConfig = (logType = '') => (
-    createLogger({
-        transports: [
-            new transports.Console({
-                format: alignColorsAndTime(logType),
-            }),
-            new transports.File({
-                format: prettyPrint(), // Log file don't need color!
-                filename: './output/error.log',
-                level: 'error',
-            }),
-        ],
-    })
-);
-
 function showDebugLog(logType = 'default', ...args) {
-    const debugLog = commonLoggerConfig(logType);
-    if (isDebug) debugLog.info(args); // = debugLog.silent = !isDebug;
+    // = debugLog.silent = !isDebug;
+    if (isDebug) {
+        commonLoggerConfig.info({
+            label: `[${logType}]`,
+            message: args,
+        });
+    }
 }
 
 function showWarningLog(warningType = 'default', ...args) {
-    const debugLog = commonLoggerConfig(warningType);
-    debugLog.warn(args);
+    commonLoggerConfig.warn({
+        label: `[${warningType}]`,
+        message: args,
+    });
 }
 
 function showErrorLog(errorType = 'default', ...args) {
-    const errorLogger = commonLoggerConfig(errorType);
-    errorLogger.error(args);
+    commonLoggerConfig.error({
+        label: `[${errorType}]`,
+        message: args,
+    });
 }
 
 module.exports = {
