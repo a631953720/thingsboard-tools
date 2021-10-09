@@ -1,6 +1,7 @@
 const APICaller = require('../../helpers/apiCaller');
 const { getTenantJWTToken } = require('../user/getTenantToken');
 const { defaultError } = require('../../constant/defaultResponse');
+const { showErrorLog } = require('../../helpers/showMsgOnLog');
 
 let token;
 
@@ -49,7 +50,7 @@ async function proxyToTB(configs) {
 
         return response;
     } catch (error) {
-        console.error('Proxy to TB error:', error);
+        showErrorLog('Proxy to TB error', error);
         return {
             ...defaultError,
             data: {

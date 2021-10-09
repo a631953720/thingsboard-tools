@@ -7,3 +7,4 @@ RPCMessageLog*.json
 SendTwoWayRPCLog*.json
 JWTToken.txt
 config/device.json
+*.log

@@ -1,3 +1,4 @@
+const { showDebugLog } = require('../../helpers/showMsgOnLog');
 const { proxyToTB } = require('../api/proxyToTB');
 const { SERVER } = require('../../constant/env');
 
@@ -23,6 +24,7 @@ async function getDeviceTokenList(deviceList) {
 
     if (!Array.isArray(deviceList)) return [];
 
+    showDebugLog('Device', 'Try to get device token list', `Device list length: ${deviceList.length}`);
     for (let i = 0; i < deviceList.length; i += 1) {
         // eslint-disable-next-line no-await-in-loop
         const token = await getDeviceToken(deviceList[i].id);
@@ -35,7 +37,7 @@ async function getDeviceTokenList(deviceList) {
             token,
         });
     }
-
+    showDebugLog('Device', 'Output device token list', `Device token list length: ${deviceTokenList.length}`);
     return deviceTokenList;
 }
 

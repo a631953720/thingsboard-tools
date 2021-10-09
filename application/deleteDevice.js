@@ -1,15 +1,15 @@
-const { showLog } = require('../helpers/showMsgOnLog');
+const { showSimpleMessage } = require('../helpers/showMsgOnLog');
 const deleteAllDevice = require('../controllers/devices/deleteAllDevice');
 
 async function deleteTBDevice() {
-    showLog('Delete all devices...');
+    showSimpleMessage('Delete all devices...');
 
     const response = await deleteAllDevice();
 
     if (response.status >= 400) {
-        showLog('Delete all devices error');
+        showSimpleMessage('Delete all devices error');
     } else {
-        showLog('Done');
+        showSimpleMessage('Done');
     }
 }
 

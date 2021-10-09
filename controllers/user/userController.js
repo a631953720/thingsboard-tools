@@ -1,5 +1,12 @@
 const APICaller = require('../../helpers/apiCaller');
 const { SERVER } = require('../../constant/env');
+const { showDebugLog } = require('../../helpers/showMsgOnLog');
+const { jsonStringify } = require('../../helpers/jsonHandler');
+
+const adminAccount = {
+    username: 'sysadmin@thingsboard.org',
+    password: 'sysadmin',
+};
 
 async function loginAdmin() {
     const opt = {
@@ -8,12 +15,9 @@ async function loginAdmin() {
         headers: {
             'Content-Type': 'application/json',
         },
-        data: JSON.stringify({
-            username: 'sysadmin@thingsboard.org',
-            password: 'sysadmin',
-        }),
+        data: jsonStringify(adminAccount),
     };
-
+    showDebugLog('Login admin', 'Login admin account', adminAccount);
     const response = await APICaller(opt);
     return response.token;
 }
@@ -27,7 +31,7 @@ async function getTenantGroupId(token) {
             'X-Authorization': `Bearer ${token}`,
         },
     };
-
+    showDebugLog('Tenant group', 'Get tenant group id');
     const response = await APICaller(opt);
     const tenantGroupId = response.data[0].id.id;
     return tenantGroupId;
@@ -42,7 +46,7 @@ async function getTenantId(token, tenantGroupId) {
             'X-Authorization': `Bearer ${token}`,
         },
     };
-
+    showDebugLog('Tenant', 'Get tenant id');
     const response = await APICaller(opt);
     const tenantId = response.data[0].id.id;
     return tenantId;
@@ -57,7 +61,7 @@ async function getTenantToken(token, tenantId) {
             'X-Authorization': `Bearer ${token}`,
         },
     };
-
+    showDebugLog('Tenant', 'Get tenant token');
     const response = await APICaller(opt);
     return response.token;
 }

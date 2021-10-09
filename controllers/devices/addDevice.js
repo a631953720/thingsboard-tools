@@ -1,6 +1,8 @@
 const { proxyToTB } = require('../api/proxyToTB');
 const { SERVER, DEVICE } = require('../../constant/env');
 const getDeviceTokenList = require('./getDeviceTokenList');
+const { showDebugLog } = require('../../helpers/showMsgOnLog');
+const { jsonStringify } = require('../../helpers/jsonHandler');
 
 const opt = {
     method: 'post',
@@ -18,6 +20,7 @@ async function addDevicesAndGetDeviceList() {
         deviceType,
         deviceLabel,
     } = DEVICE;
+    showDebugLog('Device', 'Add device to TB', DEVICE);
     for (let i = 0; i < numberOfDevices; i += 1) {
         const deviceProfile = {
             name: `${deviceName}-${i}`,
@@ -28,7 +31,7 @@ async function addDevicesAndGetDeviceList() {
         // eslint-disable-next-line no-await-in-loop
         const response = await proxyToTB({
             ...opt,
-            data: JSON.stringify(deviceProfile),
+            data: jsonStringify(deviceProfile),
         });
 
         if (response.status >= 400) {
@@ -44,6 +47,7 @@ async function addDevicesAndGetDeviceList() {
 }
 
 async function getAllDeviceAccessTokenList() {
+    showDebugLog('Device', 'Try to get all device token');
     const deviceList = await addDevicesAndGetDeviceList();
     return getDeviceTokenList(deviceList);
 }
