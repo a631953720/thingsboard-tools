@@ -31,7 +31,7 @@ const commonLoggerConfig = (logType = '') => (
         transports: [
             new transports.Console(),
             new transports.File({
-                filename: 'error.log',
+                filename: './output/error.log',
                 level: 'error',
             }),
         ],
@@ -40,7 +40,7 @@ const commonLoggerConfig = (logType = '') => (
 
 function showDebugLog(logType = 'default', ...args) {
     const debugLog = commonLoggerConfig(logType);
-    if (isDebug) debugLog.info(args);
+    if (isDebug) debugLog.info(args); // = debugLog.silent = !isDebug;
 }
 
 function showWarningLog(warningType = 'default', ...args) {
