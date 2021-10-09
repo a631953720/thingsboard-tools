@@ -77,6 +77,9 @@ SUBSCRIBE_RPC=true
 # Log file settings
 SAVE_OUTPUT_FREQUENCY= save_output_every_some_seconds
 SAVE_LOG=true
+
+# DEBUG
+DEBUG=false
 ```
 
 ## 3. Environmental variables
