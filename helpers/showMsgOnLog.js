@@ -14,11 +14,13 @@ const {
 } = format;
 const { isDebug } = SERVER;
 
+// This logger will show information to user
 const showSimpleMessage = createLogger({
     format: simple(),
     transports: [new transports.Console()],
 });
 
+// This logger will show log likes debug, warning, error, etc...
 const commonLoggerConfig = (logType = '') => (
     createLogger({
         format: combine(
@@ -26,7 +28,13 @@ const commonLoggerConfig = (logType = '') => (
             timestamp(),
             prettyPrint(),
         ),
-        transports: [new transports.Console()],
+        transports: [
+            new transports.Console(),
+            new transports.File({
+                filename: 'error.log',
+                level: 'error',
+            }),
+        ],
     })
 );
 
