@@ -36,6 +36,18 @@ function showDebugLog(logType = 'default', ...args) {
     }
 }
 
+function showWarningLog(warningType = 'default', ...args) {
+    const debugLog = createLogger({
+        format: combine(
+            label({ label: warningType }),
+            timestamp(),
+            prettyPrint(),
+        ),
+        transports: [new transports.Console()],
+    });
+    debugLog.warn(args);
+}
+
 function showErrorLog(errorType = 'default', ...args) {
     const errorLogger = createLogger({
         format: combine(
@@ -51,5 +63,6 @@ function showErrorLog(errorType = 'default', ...args) {
 module.exports = {
     showDebugLog,
     showErrorLog,
+    showWarningLog,
     showSimpleMessage: showSimpleMessage.info,
 };
