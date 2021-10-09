@@ -56,12 +56,7 @@ async function createTenant(token, tenantGroupId) {
     return response.id.id;
 }
 
-async function createTenantAccount(adminToken) {
-    const tenantGroupId = await createTenantGroup(adminToken);
-    const tenantId = await createTenant(adminToken, tenantGroupId);
-    return tenantId;
-}
-
 module.exports = {
-    createTenantAccount,
+    createTenantGroup,
+    createTenant,
 };
