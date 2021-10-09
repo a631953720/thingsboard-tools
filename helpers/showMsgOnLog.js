@@ -21,42 +21,29 @@ const showSimpleMessage = createLogger({
     transports: [new transports.Console()],
 });
 
-function showDebugLog(logType = 'default', ...args) {
-    const debugLog = createLogger({
+const commonLoggerConfig = (logType = '') => (
+    createLogger({
         format: combine(
             label({ label: logType }),
             timestamp(),
             prettyPrint(),
         ),
         transports: [new transports.Console()],
-    });
+    })
+);
 
-    if (isDebug) {
-        debugLog.info(args);
-    }
+function showDebugLog(logType = 'default', ...args) {
+    const debugLog = commonLoggerConfig(logType);
+    if (isDebug) debugLog.info(args);
 }
 
 function showWarningLog(warningType = 'default', ...args) {
-    const debugLog = createLogger({
-        format: combine(
-            label({ label: warningType }),
-            timestamp(),
-            prettyPrint(),
-        ),
-        transports: [new transports.Console()],
-    });
+    const debugLog = commonLoggerConfig(warningType);
     debugLog.warn(args);
 }
 
 function showErrorLog(errorType = 'default', ...args) {
-    const errorLogger = createLogger({
-        format: combine(
-            label({ label: errorType }),
-            timestamp(),
-            prettyPrint(),
-        ),
-        transports: [new transports.Console()],
-    });
+    const errorLogger = commonLoggerConfig(errorType);
     errorLogger.error(args);
 }
 
