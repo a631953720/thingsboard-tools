@@ -1,7 +1,7 @@
 const { proxyToTB } = require('../api/proxyToTB');
 const { SERVER, FILE } = require('../../constant/env');
 const { saveServerTwoWayRPCToDevice } = require('../../helpers/saveOutput');
-const { showLog } = require('../../helpers/showMsgOnLog');
+const { showSimpleMessage, showError } = require('../../helpers/showMsgOnLog');
 
 const globalMessageList = {
     error: [],
@@ -46,14 +46,14 @@ async function serverTwoWayRPCToDevice(config) {
         const res = await proxyToTB({ ...opt });
 
         if (res.status >= 400) {
-            showLog('RPC error...');
+            showSimpleMessage('RPC error...');
             globalMessageList.error.push({ message: res.data });
             saveRPCLog({
                 isError: true,
                 messageList: globalMessageList.error,
             });
         } else {
-            showLog('RPC success!');
+            showSimpleMessage('RPC success!');
             globalMessageList.success.push({ message: res });
             saveRPCLog({
                 isError: false,
@@ -61,7 +61,7 @@ async function serverTwoWayRPCToDevice(config) {
             });
         }
     } catch (error) {
-        console.error('[RPC Error]', error);
+        showError('[RPC Error]', error);
     }
 }
 

@@ -6,7 +6,7 @@ const {
 const { rawData } = require('../../helpers/mockData');
 const { initConnect, subscribeRPC } = require('./mqttConnector');
 const { saveTestInformation } = require('../../helpers/saveOutput');
-const { showLog } = require('../../helpers/showMsgOnLog');
+const { showSimpleMessage } = require('../../helpers/showMsgOnLog');
 const { telemetryTopic } = require('../../constant/mqttTopic');
 // 要處理檔案不存在的問題，可能從init下手
 const deviceList = require('../../output/deviceList.json');
@@ -29,13 +29,13 @@ function publishData(config) {
         const data = JSON.stringify(rawData());
 
         client.publish(telemetryTopic, data, () => {
-            showLog(`${device.name} send data`);
+            showSimpleMessage(`${device.name} send data`);
             timeArr[idx] += 1;
         });
 
         if (timeArr[idx] >= testTime && testTime !== 0) {
             clearInterval(timeId);
-            showLog('test end');
+            showSimpleMessage('test end');
         }
 
         if (client.disconnected) clearInterval(timeId);

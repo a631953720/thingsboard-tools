@@ -1,5 +1,5 @@
 const mqtt = require('mqtt');
-const { showLog, showError } = require('../../helpers/showMsgOnLog');
+const { showSimpleMessage } = require('../../helpers/showMsgOnLog');
 const { SERVER, MQTT, FILE } = require('../../constant/env');
 const { saveErrorDeviceList, saveVirtualDeviceReceiveRPC } = require('../../helpers/saveOutput');
 const { serverRPCTopic, responseRPCTopic } = require('../../constant/mqttTopic');
@@ -15,11 +15,11 @@ function initConnect(device) {
     });
 
     client.once('connect', () => {
-        showLog(`${device.name} connected`);
+        showSimpleMessage(`${device.name} connected`);
     });
 
     client.once('error', (error) => {
-        showError(`${device.name} can't connect: ${error}`);
+        showSimpleMessage(`${device.name} can't connect: ${error}`);
         errorDeviceList.push({
             device: device.name,
             message: error,
@@ -34,8 +34,8 @@ function subscribeRPC(client) {
     client.subscribe(serverRPCTopic);
 
     client.on('message', (topic, message) => {
-        console.log('request.topic: ', topic);
-        console.log('request.body: ', JSON.parse(message));
+        showSimpleMessage(`request.topic: ${topic}`);
+        showSimpleMessage('request.body: ', JSON.parse(message));
 
         const serverRPCMessage = JSON.parse(message);
         const requestId = topic.slice('v1/devices/me/rpc/request/'.length);
