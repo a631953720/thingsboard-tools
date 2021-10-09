@@ -3,9 +3,16 @@ const { SERVER } = require('../../constant/env');
 const { showDebugLog } = require('../../helpers/showMsgOnLog');
 const { jsonStringify } = require('../../helpers/jsonHandler');
 
-const adminAccount = {
-    username: 'sysadmin@thingsboard.org',
-    password: 'sysadmin',
+const {
+    tenantGroupName,
+    tenantEmail,
+    adminEmail,
+    adminPassword,
+} = SERVER;
+
+const adminProfile = {
+    username: adminEmail,
+    password: adminPassword,
 };
 
 async function loginAdmin() {
@@ -15,9 +22,9 @@ async function loginAdmin() {
         headers: {
             'Content-Type': 'application/json',
         },
-        data: jsonStringify(adminAccount),
+        data: jsonStringify(adminProfile),
     };
-    showDebugLog('Login admin', 'Login admin account', adminAccount);
+    showDebugLog('Login admin', 'Login admin account', adminProfile);
     const response = await APICaller(opt);
     return response.token;
 }
@@ -25,7 +32,7 @@ async function loginAdmin() {
 async function getTenantGroupId(token) {
     const opt = {
         method: 'get',
-        url: `http://${SERVER.host}:${SERVER.port}/api/tenants?pageSize=10&page=0&sortProperty=createdTime&sortOrder=DESC`,
+        url: `http://${SERVER.host}:${SERVER.port}/api/tenants?pageSize=10&page=0&sortProperty=createdTime&sortOrder=DESC&textSearch=${tenantGroupName}`,
         headers: {
             'Content-Type': 'application/json',
             'X-Authorization': `Bearer ${token}`,
@@ -40,7 +47,7 @@ async function getTenantGroupId(token) {
 async function getTenantId(token, tenantGroupId) {
     const opt = {
         method: 'get',
-        url: `http://${SERVER.host}:${SERVER.port}/api/tenant/${tenantGroupId}/users?pageSize=10&page=0&sortProperty=createdTime&sortOrder=DESC`,
+        url: `http://${SERVER.host}:${SERVER.port}/api/tenant/${tenantGroupId}/users?pageSize=10&page=0&sortProperty=createdTime&sortOrder=DESC&textSearch=${tenantEmail}`,
         headers: {
             'Content-Type': 'application/json',
             'X-Authorization': `Bearer ${token}`,

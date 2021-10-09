@@ -10,13 +10,14 @@ const defaultDevice = {
 };
 
 try {
-    const { configDeviceFilePath } = FILE;
+    const { configDeviceFilePath, deviceJsonPath } = FILE;
     if (fs.existsSync(configDeviceFilePath)) {
         showSimpleMessage('Device config file exist!');
     } else {
         showSimpleMessage('Device config file not exist...');
         showSimpleMessage('Try to create sample device config file.');
         fs.writeFileSync(configDeviceFilePath, jsonStringify(defaultDevice));
+        fs.writeFileSync(deviceJsonPath, jsonStringify([]));
     }
 } catch (error) {
     showSimpleMessage('device config file error', error);

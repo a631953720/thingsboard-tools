@@ -3,17 +3,25 @@ const { jsonStringify } = require('../../helpers/jsonHandler');
 const { showDebugLog } = require('../../helpers/showMsgOnLog');
 const { SERVER } = require('../../constant/env');
 
+const {
+    tenantEmail,
+    tenantGroupName,
+    tenantName,
+} = SERVER;
+
 const tenantGroupProfile = {
-    title: 'test',
+    title: tenantGroupName,
 };
 
-const tenantProfile = (tenantGroupId) => ({
+const getTenantProfile = (tenantGroupId) => ({
     authority: 'TENANT_ADMIN',
-    email: 'test@gmail.com',
+    email: tenantEmail,
     tenantId: {
         entityType: 'TENANT',
         id: tenantGroupId,
     },
+    firstName: 'test',
+    lastName: tenantName,
 });
 
 async function createTenantGroup(adminToken) {
@@ -33,7 +41,7 @@ async function createTenantGroup(adminToken) {
 }
 
 async function createTenant(token, tenantGroupId) {
-    const profile = tenantProfile(tenantGroupId);
+    const profile = getTenantProfile(tenantGroupId);
     const opt = {
         method: 'post',
         url: `http://${SERVER.host}:${SERVER.port}/api/user?sendActivationMail=false`,
@@ -48,12 +56,7 @@ async function createTenant(token, tenantGroupId) {
     return response.id.id;
 }
 
-async function createTenantAccount(adminToken) {
-    const tenantGroupId = await createTenantGroup(adminToken);
-    const tenantId = await createTenant(adminToken, tenantGroupId);
-    return tenantId;
-}
-
 module.exports = {
-    createTenantAccount,
+    createTenantGroup,
+    createTenant,
 };

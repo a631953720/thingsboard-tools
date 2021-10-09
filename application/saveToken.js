@@ -3,7 +3,9 @@ const { saveTenantToken } = require('../helpers/saveOutput');
 
 async function saveTokenToFile() {
     const token = await getTenantJWTToken();
-    saveTenantToken(token);
+    if (token) {
+        saveTenantToken(token);
+    }
 }
 
 saveTokenToFile();
