@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { FILE } = require('../constant/env');
-const { showSimpleMessage, showError } = require('./showMsgOnLog');
+const { showSimpleMessage, showErrorLog } = require('./showMsgOnLog');
 const { jsonStringify } = require('./jsonHandler');
 const deviceList = require('../output/deviceList.json');
 
@@ -15,7 +15,7 @@ function saveTestInformation(count) {
     });
 
     fs.writeFileSync(jsonPath, data, (err) => {
-        showError('Data written to file error', err);
+        showErrorLog('Data written to file error', err);
     });
 }
 
@@ -29,7 +29,7 @@ function saveErrorDeviceList(errorDeviceList) {
     });
 
     fs.writeFileSync(jsonPath, data, (err) => {
-        showError('Data written to file error', err);
+        showErrorLog('Data written to file error', err);
     });
 }
 
@@ -43,7 +43,7 @@ function saveVirtualDeviceReceiveRPC(RPCMessageList) {
     });
 
     fs.writeFileSync(jsonPath, data, (err) => {
-        showError('Data written to file error', err);
+        showErrorLog('Data written to file error', err);
     });
 }
 
@@ -53,7 +53,7 @@ function saveTenantToken(token) {
     const filePath = FILE.JWTokenFilePath;
 
     fs.writeFileSync(filePath, `Bearer ${token}`, (err) => {
-        showError('Data written to file error', err);
+        showErrorLog('Data written to file error', err);
     });
 }
 
@@ -70,7 +70,7 @@ function saveServerTwoWayRPCToDevice(config) {
         });
 
         fs.writeFileSync(jsonPath, data, (err) => {
-            showError('Data written to file error', err);
+            showErrorLog('Data written to file error', err);
         });
     } else {
         const data = jsonStringify({
@@ -79,7 +79,7 @@ function saveServerTwoWayRPCToDevice(config) {
         });
 
         fs.writeFileSync(jsonPath, data, (err) => {
-            showError('Data written to file error', err);
+            showErrorLog('Data written to file error', err);
         });
     }
 }

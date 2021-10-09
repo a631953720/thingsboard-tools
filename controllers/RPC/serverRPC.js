@@ -1,7 +1,7 @@
 const { proxyToTB } = require('../api/proxyToTB');
 const { SERVER, FILE } = require('../../constant/env');
 const { saveServerTwoWayRPCToDevice } = require('../../helpers/saveOutput');
-const { showSimpleMessage, showError } = require('../../helpers/showMsgOnLog');
+const { showSimpleMessage, showErrorLog } = require('../../helpers/showMsgOnLog');
 const { jsonStringify } = require('../../helpers/jsonHandler');
 
 const globalMessageList = {
@@ -62,7 +62,7 @@ async function serverTwoWayRPCToDevice(config) {
             });
         }
     } catch (error) {
-        showError('[RPC Error]', error);
+        showErrorLog('[RPC Error]', error);
     }
 }
 

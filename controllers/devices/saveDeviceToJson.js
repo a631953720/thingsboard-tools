@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { showSimpleMessage, showError, showDebugLog } = require('../../helpers/showMsgOnLog');
+const { showSimpleMessage, showErrorLog, showDebugLog } = require('../../helpers/showMsgOnLog');
 const { jsonStringify } = require('../../helpers/jsonHandler');
 const { FILE } = require('../../constant/env');
 
@@ -15,7 +15,7 @@ async function saveDeviceListToJsonFile(deviceList) {
         showSimpleMessage('Output json file');
 
         fs.writeFileSync(jsonPath, jsonStringify(deviceList), (err) => {
-            showError('Data written to file error', err);
+            showErrorLog('Data written to file error', err);
         });
     }
 }

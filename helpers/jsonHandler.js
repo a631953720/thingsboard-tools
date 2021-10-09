@@ -1,11 +1,11 @@
-const { showError } = require('./showMsgOnLog');
+const { showErrorLog } = require('./showMsgOnLog');
 
 function jsonParse(params) {
     try {
         const jsonObject = JSON.parse(params);
         return jsonObject;
     } catch (error) {
-        showError('Json parse', 'jsonParser error');
+        showErrorLog('Json parse', 'jsonParser error');
         return params;
     }
 }
@@ -15,7 +15,7 @@ function jsonStringify(params) {
         const jsonString = JSON.stringify(params);
         return jsonString;
     } catch (error) {
-        showError('Json stringify', 'jsonStringify error');
+        showErrorLog('Json stringify', 'jsonStringify error');
         return params;
     }
 }

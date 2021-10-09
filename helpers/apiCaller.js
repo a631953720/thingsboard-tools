@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { defaultError } = require('../constant/defaultResponse');
-const { showError } = require('./showMsgOnLog');
+const { showErrorLog } = require('./showMsgOnLog');
 
 /**
  * @typedef {object} defaultError Default error object
@@ -32,7 +32,7 @@ async function APICaller(configs) {
                 url: error.response.config.url,
             };
 
-            showError('APICaller error', errorMessage);
+            showErrorLog('APICaller error', errorMessage);
 
             return errorMessage;
         // eslint-disable-next-line no-else-return
@@ -40,14 +40,14 @@ async function APICaller(configs) {
             // The request was made but no response was received
             // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
             // http.ClientRequest in node.js
-            showError('APICaller error', error.request);
+            showErrorLog('APICaller error', error.request);
             return {
                 ...defaultError,
                 data: error.request,
             };
         } else {
             // Something happened in setting up the request that triggered an Error
-            showError('APICaller error', error.message);
+            showErrorLog('APICaller error', error.message);
             return {
                 ...defaultError,
                 data: {

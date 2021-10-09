@@ -36,7 +36,7 @@ function showDebugLog(logType = 'default', ...args) {
     }
 }
 
-function showError(errorType = 'default', ...args) {
+function showErrorLog(errorType = 'default', ...args) {
     const errorLogger = createLogger({
         format: combine(
             label({ label: errorType }),
@@ -50,6 +50,6 @@ function showError(errorType = 'default', ...args) {
 
 module.exports = {
     showDebugLog,
-    showError,
+    showErrorLog,
     showSimpleMessage: showSimpleMessage.info,
 };
