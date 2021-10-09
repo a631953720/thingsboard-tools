@@ -4,7 +4,7 @@ const {
     getTenantId,
     getTenantToken,
 } = require('./userController');
-const { showDebugLog } = require('../../helpers/showMsgOnLog');
+const { showDebugLog, showWarningLog } = require('../../helpers/showMsgOnLog');
 
 const { createTenantAccount } = require('./createTenants');
 
@@ -19,6 +19,7 @@ async function getTenantJWTToken() {
         tenantToken = await getTenantToken(adminToken, tenantId);
     } catch (error) {
         // When get tenantToken error, try create new tenant.
+        showWarningLog('Get tenant JWT token', 'Get tenant token error. Try to create new tenant account!!!');
         showDebugLog('Get tenant JWT token', 'Get tenant token error...');
         showDebugLog('Get tenant JWT token', 'Try to create new tenant account');
         const tenantId = await createTenantAccount(adminToken);
