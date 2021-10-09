@@ -97,7 +97,7 @@ SAVE_LOG=true
 | SUBSCRIBE_RPC         | Virtual device will subscribe TB RPC topic                | false         |
 | SAVE_OUTPUT_FREQUENCY | Save program output every few seconds (s)                 | 30            |
 | SAVE_LOG              | Program will save log to output folder                    | false         |
-
+| DEBUG                 | Program will show debug information                       | false         |
 
 ## 4.Init folder
 
