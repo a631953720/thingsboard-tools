@@ -1,13 +1,14 @@
 const fs = require('fs');
 const { FILE } = require('../constant/env');
 const { showSimpleMessage, showError } = require('./showMsgOnLog');
+const { jsonStringify } = require('./jsonHandler');
 const deviceList = require('../output/deviceList.json');
 
 function saveTestInformation(count) {
     showSimpleMessage('Save output...');
     // 要處理檔案不存在的問題，可能從init下手
     const jsonPath = FILE.logFilePath;
-    const data = JSON.stringify({
+    const data = jsonStringify({
         deviceCount: deviceList.length,
         testCount: count,
         updateTime: new Date().toLocaleString(),
@@ -22,7 +23,7 @@ function saveErrorDeviceList(errorDeviceList) {
     showSimpleMessage('Save error device list...');
 
     const jsonPath = FILE.errorLogFilePath;
-    const data = JSON.stringify({
+    const data = jsonStringify({
         ...errorDeviceList,
         updateTime: new Date().toLocaleString(),
     });
@@ -36,7 +37,7 @@ function saveVirtualDeviceReceiveRPC(RPCMessageList) {
     showSimpleMessage('Save receiving RPC message...');
 
     const jsonPath = FILE.RPCMessageLogFilePath;
-    const data = JSON.stringify({
+    const data = jsonStringify({
         ...RPCMessageList,
         updateTime: new Date().toLocaleString(),
     });
@@ -63,7 +64,7 @@ function saveServerTwoWayRPCToDevice(config) {
     const jsonPath = FILE.sendTwoWayRPCLogFilePath;
 
     if (isError) {
-        const data = JSON.stringify({
+        const data = jsonStringify({
             error: messageList,
             updateTime: new Date().toLocaleString(),
         });
@@ -72,7 +73,7 @@ function saveServerTwoWayRPCToDevice(config) {
             showError('Data written to file error', err);
         });
     } else {
-        const data = JSON.stringify({
+        const data = jsonStringify({
             data: messageList,
             updateTime: new Date().toLocaleString(),
         });

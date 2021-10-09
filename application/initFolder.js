@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { showSimpleMessage } = require('../helpers/showMsgOnLog');
+const { jsonStringify } = require('../helpers/jsonHandler');
 const { FILE } = require('../constant/env');
 
 const defaultDevice = {
@@ -15,7 +16,7 @@ try {
     } else {
         showSimpleMessage('Device config file not exist...');
         showSimpleMessage('Try to create sample device config file.');
-        fs.writeFileSync(configDeviceFilePath, JSON.stringify(defaultDevice));
+        fs.writeFileSync(configDeviceFilePath, jsonStringify(defaultDevice));
     }
 } catch (error) {
     showSimpleMessage('device config file error', error);

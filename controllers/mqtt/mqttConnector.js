@@ -3,6 +3,7 @@ const { showSimpleMessage } = require('../../helpers/showMsgOnLog');
 const { SERVER, MQTT, FILE } = require('../../constant/env');
 const { saveErrorDeviceList, saveVirtualDeviceReceiveRPC } = require('../../helpers/saveOutput');
 const { serverRPCTopic, responseRPCTopic } = require('../../constant/mqttTopic');
+const { jsonStringify, jsonParse } = require('../../helpers/jsonHandler');
 
 const RPCMessageList = [];
 const errorDeviceList = [];
@@ -35,11 +36,11 @@ function subscribeRPC(client) {
 
     client.on('message', (topic, message) => {
         showSimpleMessage(`request.topic: ${topic}`);
-        showSimpleMessage('request.body: ', JSON.parse(message));
+        showSimpleMessage('request.body: ', jsonParse(message));
 
-        const serverRPCMessage = JSON.parse(message);
+        const serverRPCMessage = jsonParse(message);
         const requestId = topic.slice('v1/devices/me/rpc/request/'.length);
-        const responsePayload = JSON.stringify({
+        const responsePayload = jsonStringify({
             method: serverRPCMessage.method,
             params: {
                 ...serverRPCMessage.params,

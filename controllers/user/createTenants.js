@@ -1,5 +1,20 @@
 const APICaller = require('../../helpers/apiCaller');
+const { jsonStringify } = require('../../helpers/jsonHandler');
+const { showDebugLog } = require('../../helpers/showMsgOnLog');
 const { SERVER } = require('../../constant/env');
+
+const tenantGroupProfile = {
+    title: 'test',
+};
+
+const tenantProfile = (tenantGroupId) => ({
+    authority: 'TENANT_ADMIN',
+    email: 'test@gmail.com',
+    tenantId: {
+        entityType: 'TENANT',
+        id: tenantGroupId,
+    },
+});
 
 async function createTenantGroup(adminToken) {
     const opt = {
@@ -9,17 +24,16 @@ async function createTenantGroup(adminToken) {
             'Content-Type': 'application/json',
             'X-Authorization': `Bearer ${adminToken}`,
         },
-        data: JSON.stringify({
-            title: 'test',
-        }),
+        data: jsonStringify(tenantGroupProfile),
     };
+    showDebugLog('Tenant group', 'Create tenant group', tenantGroupProfile);
     const response = await APICaller(opt);
     const tenantGroupId = response.id.id;
-
     return tenantGroupId;
 }
 
 async function createTenant(token, tenantGroupId) {
+    const profile = tenantProfile(tenantGroupId);
     const opt = {
         method: 'post',
         url: `http://${SERVER.host}:${SERVER.port}/api/user?sendActivationMail=false`,
@@ -27,15 +41,9 @@ async function createTenant(token, tenantGroupId) {
             'Content-Type': 'application/json',
             'X-Authorization': `Bearer ${token}`,
         },
-        data: JSON.stringify({
-            authority: 'TENANT_ADMIN',
-            email: 'test@gmail.com',
-            tenantId: {
-                entityType: 'TENANT',
-                id: tenantGroupId,
-            },
-        }),
+        data: jsonStringify(profile),
     };
+    showDebugLog('Tenant', 'Create tenant account', profile);
     const response = await APICaller(opt);
     return response.id.id;
 }

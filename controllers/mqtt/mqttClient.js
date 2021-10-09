@@ -6,8 +6,9 @@ const {
 const { rawData } = require('../../helpers/mockData');
 const { initConnect, subscribeRPC } = require('./mqttConnector');
 const { saveTestInformation } = require('../../helpers/saveOutput');
-const { showSimpleMessage } = require('../../helpers/showMsgOnLog');
+const { showSimpleMessage, showDebugLog } = require('../../helpers/showMsgOnLog');
 const { telemetryTopic } = require('../../constant/mqttTopic');
+const { jsonStringify } = require('../../helpers/jsonHandler');
 // 要處理檔案不存在的問題，可能從init下手
 const deviceList = require('../../output/deviceList.json');
 
@@ -26,7 +27,7 @@ function publishData(config) {
     } = config;
 
     const timeId = setInterval(() => {
-        const data = JSON.stringify(rawData());
+        const data = jsonStringify(rawData());
 
         client.publish(telemetryTopic, data, () => {
             showSimpleMessage(`${device.name} send data`);
@@ -52,12 +53,14 @@ function connectToTB(config) {
     const client = initConnect(device);
 
     if (isSendData) {
+        showDebugLog('MQTT', 'Client will send data');
         setTimeout(() => {
             publishData({ ...config, client });
         }, (connectDelay * deviceListLength));
     }
 
     if (isSubscribeRPC) {
+        showDebugLog('MQTT', 'Client will subscribe RPC topic');
         subscribeRPC(client);
     }
 }
@@ -66,6 +69,7 @@ function MQTTConnecter(config) {
     // const { frequency, isSendData } = config;
     const deviceListLength = deviceList.length;
 
+    showDebugLog('MQTT', 'Try to connect to TB');
     deviceList.forEach((device, idx) => {
         const connectConfig = {
             ...config,

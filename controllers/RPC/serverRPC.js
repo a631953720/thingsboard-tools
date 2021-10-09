@@ -2,6 +2,7 @@ const { proxyToTB } = require('../api/proxyToTB');
 const { SERVER, FILE } = require('../../constant/env');
 const { saveServerTwoWayRPCToDevice } = require('../../helpers/saveOutput');
 const { showSimpleMessage, showError } = require('../../helpers/showMsgOnLog');
+const { jsonStringify } = require('../../helpers/jsonHandler');
 
 const globalMessageList = {
     error: [],
@@ -36,7 +37,7 @@ async function serverTwoWayRPCToDevice(config) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            data: JSON.stringify({
+            data: jsonStringify({
                 method,
                 params,
                 timeout: 30000,
