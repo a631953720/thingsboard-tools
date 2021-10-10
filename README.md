@@ -59,7 +59,7 @@ HOST= TB_server_host
 PORT= TB_server_port
 
 # TB account setting
-ADMIN_ACCOUNT= Admin_email
+ADMIN_EMAIL= Admin_email
 ADMIN_PASSWORD= Admin_password
 TENANT_GROUP_NAME= Tenant_group_name
 TENANT_NAME= Tenant_name
