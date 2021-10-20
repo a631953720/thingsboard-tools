@@ -26,11 +26,21 @@ function saveRPCLog(config) {
  * @param {string} config.deviceId TB device id
  * @param {string} config.method RPC method
  * @param {any} config.params RPC payload
+ * @param {number} config.timeout RPC timeout
+ * @param {boolean} config.persistent RPC is persistent?
+ * @param {number} config.retries RPC retry times
  */
 
 async function serverTwoWayRPCToDevice(config) {
     try {
-        const { deviceId, method, params } = config;
+        const {
+            deviceId,
+            method,
+            params,
+            timeout = 5000,
+            persistent = false,
+            retries = 0,
+        } = config;
         const opt = {
             method: 'post',
             url: `http://${SERVER.host}:${SERVER.port}/api/plugins/rpc/twoway/${deviceId}`,
@@ -40,7 +50,9 @@ async function serverTwoWayRPCToDevice(config) {
             data: jsonStringify({
                 method,
                 params,
-                timeout: 30000,
+                timeout,
+                persistent,
+                retries,
             }),
         };
 
